@@ -26,6 +26,11 @@ var counter = 0;
 
 $("#applist").click(function(){
   $("#page1").toggleClass("hide");
+  if($("#status").text() == "OS Simulator - HOME PAGE"){
+    $("#status").text("Applications")
+  }else{
+    $("#status").text("OS Simulator - HOME PAGE");
+  }
   $("#page2").toggleClass("hide");
 });
 
