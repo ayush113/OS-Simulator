@@ -29,6 +29,7 @@ body {
   text-align: center;
   margin-right: 20px;
   /* color: white; */
+  /* text-shadow: 1px 1px 3px #000000; */
 }
 
 .hide {
@@ -75,7 +76,7 @@ body {
 }
 
 #username {
-  color : rgb(255, 255, 255, 0.3);
+  color : rgb(255, 255, 255, 0.7);
   font-size: 200%;
   margin-left: 10px;
 }
@@ -83,7 +84,7 @@ body {
 #log {
   background-color: rgba(0, 0, 0, 0.4);
   border-radius: 8px;
-
+  box-shadow: 3px 2px 4px rgba(0, 0, 0, .5);
   padding: 10px 5px;
 
   min-width: 350px;
@@ -137,9 +138,10 @@ body {
 }
 
 #statusbar {
-  background-color: rgba(0, 0, 0, 0.5);
+  background: linear-gradient( rgba(0, 0, 0, 0.5) , rgba(0, 0, 0, 0.7));
   color : white;
   padding: 0 20px;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
 }
 
 #appIcon {
