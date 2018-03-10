@@ -61,7 +61,10 @@ $("#Input").keypress(function(e){
 });
 
 $("#logout").click(function(){
-  $("body").css({'background' : 'url(../images/oldback.jpg)' , 'background-position' : 'top' , 'background-size' : 'cover'});
-  $("#home").toggleClass("hide");
-  $("#loginPage").toggleClass("hide");
+  var a=confirm("Do you really want to logout?");
+  if(a){
+    $("body").css({'background' : 'url(../images/oldback.jpg)' , 'background-position' : 'top' , 'background-size' : 'cover'});
+    $("#home").toggleClass("hide");
+    $("#loginPage").toggleClass("hide");
+  }
 });

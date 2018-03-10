@@ -53,6 +53,25 @@ img{
   border-radius: 3px;
 }
 
+.fadeIn {
+  opacity: 0;
+  animation: fadeIn 1s forwards alternate;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-275px);
+  }
+  30% {
+    opacity: 0.5;
+    
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(50px);
+  }
+}
 
 #home {
   height: 100%;
