@@ -35,7 +35,7 @@ body {
 }
 
 #mainRow {
-  height: 100%;
+  height: 96%;
   padding: 5px;
 }
 
@@ -112,7 +112,7 @@ body {
 
 #accordion {
   margin: 10px;
-  height : 90%;
+  height : 77%;
   top:140px;
   left: 0;
   right:0;
