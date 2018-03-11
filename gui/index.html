@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+	<link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
 </head>
 <body onload="init()">
 
@@ -28,13 +29,13 @@
 	<div id="home" class="hide">
 			<div id="statusbar">
 				<span id = "status">OS Simulator - HOME PAGE</span>
-				<span>
-					<img class="statimg" src="../images/battery.png" title="Battery:92%">
-					<img class="statimg" src="../images/wifi.png" title="Connected:NITK-NET">
-					<img class="statimg" src="../images/volume.png" title="Volume:85%">
-				</span>
+				<span class="fakeIcons">
+					<i class="fas fa-wifi" id="fake" title="Connected to NITK-NET"></i>
+					<i class="fas fa-battery-three-quarters" id="fake" title=" 78% "></i>
+					<i class="fas fa-volume-up" id="fake"></i>
+			 </span>
 			</div>
-			
+
 
 			<!-- main body of the home page with two coloums -->
 			<div class="row" id="mainRow">

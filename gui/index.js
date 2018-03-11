@@ -24,20 +24,22 @@ function init(){
 
 var counter = 0;
 
+
+
 $("#applist").click(function(){
-  
-  
+
+
   if($("#status").text() == "OS Simulator - HOME PAGE"){
     $("#status").text("Applications");
-    
+
   }else{
     $("#status").text("OS Simulator - HOME PAGE");
-    
+
    // $("#appContain").toggleClass("fadeIn");
   }
   $("#page2").toggleClass("hide");
   $("#page1").toggleClass("hide");
-  
+
 });
 
 
@@ -53,7 +55,7 @@ jQuery.fn.shake = function() {
 
 $("#Input").keypress(function(e){
   if(e.which == 13){
-    if($(this).val() == "password"){
+    if($(this).val() == "p"){
       $(this).val("")
       $("body").css({'background' : 'url(../images/back.jpg)' , 'background-position' : 'top' , 'background-size' : 'cover'});
       $("#home").toggleClass("hide");
@@ -74,3 +76,5 @@ $("#logout").click(function(){
     $("#loginPage").toggleClass("hide");
   }
 });
+
+$(document).tooltip({show: null});
