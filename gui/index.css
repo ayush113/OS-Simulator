@@ -55,7 +55,7 @@ img{
 
 .fadeIn {
   opacity: 0;
-  animation: fadeIn 1s forwards alternate;
+  animation: fadeIn 0.8s forwards;
 }
 
 @keyframes fadeIn {
@@ -75,21 +75,21 @@ img{
 
 .fadeOut {
   opacity: 0;
-  animation: fadeOut 1s backwards alternate;
+  animation: fadeOut 0.8s forwards;
 }
 
 @keyframes fadeOut {
   0% {
-    opacity: 0;
-    transform: translateX(-275px);
+    opacity: 1;
+    transform: translateX(50px);
   }
   30% {
     opacity: 0.5;
 
   }
   100% {
-    opacity: 1;
-    transform: translateX(50px);
+    opacity: 0;
+    transform: translateX(-275px);
   }
 }
 
@@ -99,6 +99,7 @@ img{
 
 #mainRow {
   height: 96%;
+  width: 100%;
   padding: 5px;
 }
 

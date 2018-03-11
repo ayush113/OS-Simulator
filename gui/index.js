@@ -28,18 +28,23 @@ var counter = 0;
 
 $("#applist").click(function(){
 
+  $("#appContain").toggleClass("fadeIn");
+  $("#appContain").toggleClass("fadeOut");
 
   if($("#status").text() == "OS Simulator - HOME PAGE"){
     $("#status").text("Applications");
 
+    $("#page2").toggleClass("hide");
+    $("#page1").toggleClass("hide");
   }else{
     $("#status").text("OS Simulator - HOME PAGE");
-
-   // $("#appContain").toggleClass("fadeIn");
+    setTimeout(function()
+    {
+    //do something special
+    $("#page1").toggleClass("hide");
+    $("#page2").toggleClass("hide");
+  }, 500)
   }
-  $("#page2").toggleClass("hide");
-  $("#page1").toggleClass("hide");
-
 });
 
 
@@ -76,5 +81,3 @@ $("#logout").click(function(){
     $("#loginPage").toggleClass("hide");
   }
 });
-
-$(document).tooltip({show: null});
