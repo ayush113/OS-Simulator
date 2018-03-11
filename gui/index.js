@@ -60,7 +60,7 @@ jQuery.fn.shake = function() {
 
 $("#Input").keypress(function(e){
   if(e.which == 13){
-    if($(this).val() == "p"){
+    if($(this).val() == "password"){
       $(this).val("")
       $("body").css({'background' : 'url(../images/back.jpg)' , 'background-position' : 'top' , 'background-size' : 'cover'});
       $("#home").toggleClass("hide");
