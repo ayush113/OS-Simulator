@@ -73,6 +73,26 @@ img{
   }
 }
 
+.fadeOut {
+  opacity: 0;
+  animation: fadeOut 1s backwards alternate;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 0;
+    transform: translateX(-275px);
+  }
+  30% {
+    opacity: 0.5;
+    
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(50px);
+  }
+}
+
 #home {
   height: 100%;
 }
@@ -149,8 +169,8 @@ img{
   position: absolute;
   top:0;
   bottom: 0;
-  left: 0;
-  right: 0;
+  
+  
 }
 
 
@@ -175,7 +195,7 @@ img.statimg {
 }
 
 #statusbar {
-  background: linear-gradient( rgba(0, 0, 0, 0.4) , rgba(0, 0, 0, 0.6));
+  background: linear-gradient( rgba(0, 0, 0, 0.2) , rgba(0, 0, 0, 0.3));
   color : white;
   padding: 5px 20px 10px 20px;
   box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);

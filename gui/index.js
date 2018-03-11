@@ -25,13 +25,19 @@ function init(){
 var counter = 0;
 
 $("#applist").click(function(){
-  $("#page1").toggleClass("hide");
+  
+  
   if($("#status").text() == "OS Simulator - HOME PAGE"){
-    $("#status").text("Applications")
+    $("#status").text("Applications");
+    
   }else{
     $("#status").text("OS Simulator - HOME PAGE");
+    
+   // $("#appContain").toggleClass("fadeIn");
   }
   $("#page2").toggleClass("hide");
+  $("#page1").toggleClass("hide");
+  
 });
 
 
