@@ -28,7 +28,7 @@ var counter = 0;
 
 $("#applist").click(function(){
 
-  $(this).toggleClass('flip');
+  $(this).toggleClass('rotated');
   $("#appContain").toggleClass("fadeIn");
   $("#appContain").toggleClass("fadeOut");
 
@@ -100,4 +100,13 @@ $("#logout").click(function(){
     $("#home").toggleClass("hide");
     $("#loginPage").toggleClass("hide");
   }
+});
+
+
+$(".col-sm-1 .row img").click(function(){
+    $(this).toggleClass('rotated');
+});
+
+$(".card-body img").click(function(){
+    $(this).toggleClass('rotated');
 });
