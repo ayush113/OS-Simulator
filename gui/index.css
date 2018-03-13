@@ -53,6 +53,36 @@ img{
   border-radius: 3px;
 }
 
+.teamImg {
+  margin: 0 auto;
+  padding-left: 150px;
+}
+
+.teamName {
+  padding-left: 150px;
+  font-weight: 100 !important;
+  text-transform: uppercase;
+  font-size: 120%;
+}
+
+.teamName .col {
+  max-width: 180px;
+  color: rgba(255,255,255,0.8);
+  text-align: center;
+  margin : 0px 10px;
+  font-family: 'Lora';
+}
+
+.teamImg img {
+  border-radius: 50%;
+  border: 1px solid black;
+  min-height: 180px;
+  max-width: 180px;
+  margin : 20px 10px;
+  padding: 0;
+
+}
+
 .fadeIn {
   opacity: 0;
   animation: fadeIn 0.8s forwards;
@@ -93,12 +123,14 @@ img{
   }
 }
 
-#home {
-  height: 100%;
+#home, #homePage {
+  height: 98%;
+  width: 100%;
 }
 
+
 #mainRow {
-  height: 96%;
+  height: 100%;
   width: 100%;
   padding: 5px;
 }
@@ -209,4 +241,77 @@ img{
 
   margin : 0px 35px;
   border-radius: 5px;
+}
+
+#teamPage {
+  height: 98%;
+  margin: 0;
+  background: rgba(0, 0, 0, 0.7);
+  opacity: 1;
+  font-family: 'Lora';
+}
+
+#teamHead {
+  background-color: rgba(0,0,0,0.6) ;
+  color: white;
+  text-align: center;
+  font-size: 300%;
+  font-weight: 100 !important;
+  position: relative;
+  top: 0px;
+  min-height: 50px;
+  padding: 10px;
+  margin-bottom: 30px
+  border-bottom : 1px solid white;
+}
+
+#backBtn {
+  position: absolute;
+  background-color: #333;
+  color: white;
+  bottom: 10px;
+  left: 0;
+  margin: 20px;
+  border: 1px solid white;
+  padding : 5px 15px;
+  box-shadow: 1px 1px 1px white;
+}
+
+.slideIn {
+  animation: slideIn 0.8s;
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-500px);
+  }
+  30% {
+    opacity: 0.5;
+
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+
+.slideOut {
+  opacity: 0;
+  animation: slideOut 0.8s forwards;
+}
+
+@keyframes slideOut {
+  0% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+  30% {
+    opacity: 0.5;
+
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-500px);
+  }
 }

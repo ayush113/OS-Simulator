@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 	<link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
 </head>
 <body onload="init()">
 
@@ -36,201 +37,241 @@
 			 </span>
 			</div>
 
-
-			<!-- main body of the home page with two coloums -->
-			<div class="row" id="mainRow">
-				<!-- coloum for side dock -->
-				<div class="col-sm-1">
-							<!-- App drawer : on clicking reveales the list of apps -->
-							<div class="row" id="applist">
-								<img src="../images/menu.svg" title="App menu">
-							</div>
-							<!-- icons for some selected applications -->
-							<div class="row">
-								<img src="../images/process.svg" title="Process Scheduling">
-							</div>
-							<div class="row">
-								<img src="../images/philosopher.svg" title="Dining Philosopher">
-							</div>
-							<div class="row">
-								<img src="../images/disk.svg" title="Disk Scheduling">
-							</div>
-							<div class="row">
-								<img src="../images/team.svg" title="About Team">
-							</div>
-							<!-- Button to log out the session -->
-							<div class="row" id="logout" >
-								<img src="../images/lock.svg" title="Logout">
-							</div>
-				</div>
-				<!-- Coloum for date,time and watermark -->
-				<!-- contains the list of apps as well -->
-				<!-- only one of date time watermark or applist is visible at a time -->
-				<div class="col-sm-11">
-
-					<!-- Page 1 is the one that opens up on start up -->
-					<div id="page1" class="">
-						<!-- Display current date and time -->
-						<div class="datetime">
-							<div id="clock"></div>
-							<div id="date"></div>
-						</div>
-						<!-- watermark -->
-						<div id="watermark">
-							OS SIMULATION
-						</div>
-					</div>
-
-					<!-- This content is revealed when the app drawer is clicked -->
-					<!-- Contains the list of all the apps that the OS Simulator Performs  -->
-					<div id="page2" class="hide">
-						<div class="container col-sm-11 fadeOut" id="appContain">
-								<div class="apphead">
-									Apps
+			<div class="" id="homePage" >
+				<!-- main body of the home page with two coloums -->
+				<div class="row" id="mainRow">
+					<!-- coloum for side dock -->
+					<div class="col-sm-1">
+								<!-- App drawer : on clicking reveales the list of apps -->
+								<div class="row" id="applist">
+									<img src="../images/menu.svg" title="App menu">
 								</div>
-								<br>
-								<div id="accordion">
-									  <div class="card">
-									    <div class="card-header" id="headingOne">
-									      <h5 class="mb-0">
-									        <div  data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-									          Process Scheduling
-									        </div>
-									      </h5>
-									    </div>
+								<!-- icons for some selected applications -->
+								<div class="row">
+									<img src="../images/process.svg" title="Process Scheduling">
+								</div>
+								<div class="row">
+									<img src="../images/philosopher.svg" title="Dining Philosopher">
+								</div>
+								<div class="row">
+									<img src="../images/disk.svg" title="Disk Scheduling">
+								</div>
+								<div class="row" id="teamBtn">
+									<img src="../images/team.svg" title="About Team">
+								</div>
+								<!-- Button to log out the session -->
+								<div class="row" id="logout" >
+									<img src="../images/lock.svg" title="Logout">
+								</div>
+					</div>
+					<!-- Coloum for date,time and watermark -->
+					<!-- contains the list of apps as well -->
+					<!-- only one of date time watermark or applist is visible at a time -->
+					<div class="col-sm-11">
 
-									    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-									      <div class="card-body">
+						<!-- Page 1 is the one that opens up on start up -->
+						<div id="page1" class="">
+							<!-- Display current date and time -->
+							<div class="datetime">
+								<div id="clock"></div>
+								<div id="date"></div>
+							</div>
+							<!-- watermark -->
+							<div id="watermark">
+								OS SIMULATION
+							</div>
+						</div>
+
+						<!-- This content is revealed when the app drawer is clicked -->
+						<!-- Contains the list of all the apps that the OS Simulator Performs  -->
+						<div id="page2" class="hide">
+							<div class="container col-sm-11 fadeOut" id="appContain">
+									<div class="apphead">
+										Apps
+									</div>
+									<br>
+									<div id="accordion">
+											<div class="card">
+												<div class="card-header" id="headingOne">
+													<h5 class="mb-0">
+														<div  data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+															Process Scheduling
+														</div>
+													</h5>
+												</div>
+
+												<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+													<div class="card-body">
+															<div class="row">
+																	<div class="col" id="appIcon">
+																		<img src="../images/process.svg" title="Process Scheduling">
+																	</div>
+															</div>
+													</div>
+												</div>
+											</div>
+											<div class="card">
+												<div class="card-header" id="headingTwo">
+													<h5 class="mb-0">
+														<div  data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseOne">
+															Process Synchronization
+														</div>
+													</h5>
+												</div>
+
+												<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+													<div class="card-body">
 														<div class="row">
 																<div class="col" id="appIcon">
-																	<img src="../images/process.svg" title="Process Scheduling">
+																	<img src="../images/producer.svg" title="Producer-Consumer">
+																</div>
+																<div class="col" id="appIcon">
+																	<img src="../images/reader.svg" title="Reader-Writer">
+																</div>
+																<div class="col" id="appIcon">
+																	<img src="../images/philosopher.svg" title="Dining Philosopher">
+																</div>
+																<div class="col" id="appIcon">
+																	<img src="../images/hairdresser.svg" title="Sleeping Barber">
 																</div>
 														</div>
-									      </div>
-									    </div>
-									  </div>
-										<div class="card">
-									    <div class="card-header" id="headingTwo">
-									      <h5 class="mb-0">
-									        <div  data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseOne">
-									          Process Synchronization
-									        </div>
-									      </h5>
-									    </div>
-
-									    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-									      <div class="card-body">
-													<div class="row">
-															<div class="col" id="appIcon">
-																<img src="../images/producer.svg" title="Producer-Consumer">
-															</div>
-															<div class="col" id="appIcon">
-																<img src="../images/reader.svg" title="Reader-Writer">
-															</div>
-															<div class="col" id="appIcon">
-																<img src="../images/philosopher.svg" title="Dining Philosopher">
-															</div>
-															<div class="col" id="appIcon">
-																<img src="../images/hairdresser.svg" title="Sleeping Barber">
-															</div>
-													</div>
-													
-									      </div>
-									    </div>
-									  </div>
-										<div class="card">
-									    <div class="card-header" id="headingThree">
-									      <h5 class="mb-0">
-									        <div  data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseOne">
-									          DeadLock
-									        </div>
-									      </h5>
-									    </div>
-
-									    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-									      <div class="card-body">
-													<div class="row">
-															<div class="col" id="appIcon">
-																<img src="../images/padlock.svg" title="Deadlock">
-															</div>
-													</div>
-									      </div>
-									    </div>
-									  </div>
-										<div class="card">
-									    <div class="card-header" id="headingFour">
-									      <h5 class="mb-0">
-									        <div  data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseOne">
-									          Memory Management
-									        </div>
-									      </h5>
-									    </div>
-
-									    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
-									      <div class="card-body">
-													<div class="row">
-															<div class="col" id="appIcon">
-																<img src="../images/mft.svg" title="Fixed Size">
-															</div>
-															<div class="col" id="appIcon">
-																<img src="../images/mvt.svg" title="Variable Size">
-															</div>
-													</div>
-									      </div>
-									    </div>
-									  </div>
-									  <div class="card">
-									    <div class="card-header" id="headingFive">
-									      <h5 class="mb-0">
-									        <div  data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseTwo">
-									          	Client-Server Architecture
-													</div>
-									      </h5>
-									    </div>
-									    <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
-									      <div class="card-body">
-													<div class="row">
-															<div class="col" id="appIcon">
-																<img src="../images/group.svg" title="Client-Server Architecture">
-															</div>
 
 													</div>
-									      </div>
-									    </div>
-									  </div>
-									  <div class="card">
-									    <div class="card-header" id="headingSix">
-									      <h5 class="mb-0">
-									        <div data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseThree">
-									          Disk scheduling
-									        </div>
-									      </h5>
-									    </div>
-									    <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
-									      <div class="card-body">
-													<div class="row">
-															<div class="col" id="appIcon">
-																<img src="../images/disk.svg" title="Disk Scheduling">
-															</div>
-															<div class="col" id="appIcon">
-																<img src="../images/file.svg" title="Continuous File Allocation">
-															</div>
-															<div class="col" id="appIcon">
-																<img src="../images/file-b.svg" title="Indexed File Allocation">
-															</div>
-															<div class="col" id="appIcon">
-																<img src="../images/file-g.svg" title="Linked File Allocation">
-															</div>
+												</div>
+											</div>
+											<div class="card">
+												<div class="card-header" id="headingThree">
+													<h5 class="mb-0">
+														<div  data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseOne">
+															DeadLock
+														</div>
+													</h5>
+												</div>
+
+												<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+													<div class="card-body">
+														<div class="row">
+																<div class="col" id="appIcon">
+																	<img src="../images/padlock.svg" title="Deadlock">
+																</div>
+														</div>
 													</div>
-									      </div>
-									    </div>
-									  </div>
-									</div>
+												</div>
+											</div>
+											<div class="card">
+												<div class="card-header" id="headingFour">
+													<h5 class="mb-0">
+														<div  data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseOne">
+															Memory Management
+														</div>
+													</h5>
+												</div>
+
+												<div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+													<div class="card-body">
+														<div class="row">
+																<div class="col" id="appIcon">
+																	<img src="../images/mft.svg" title="Fixed Size">
+																</div>
+																<div class="col" id="appIcon">
+																	<img src="../images/mvt.svg" title="Variable Size">
+																</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="card">
+												<div class="card-header" id="headingFive">
+													<h5 class="mb-0">
+														<div  data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseTwo">
+																Client-Server Architecture
+														</div>
+													</h5>
+												</div>
+												<div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+													<div class="card-body">
+														<div class="row">
+																<div class="col" id="appIcon">
+																	<img src="../images/group.svg" title="Client-Server Architecture">
+																</div>
+
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="card">
+												<div class="card-header" id="headingSix">
+													<h5 class="mb-0">
+														<div data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseThree">
+															Disk scheduling
+														</div>
+													</h5>
+												</div>
+												<div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
+													<div class="card-body">
+														<div class="row">
+																<div class="col" id="appIcon">
+																	<img src="../images/disk.svg" title="Disk Scheduling">
+																</div>
+																<div class="col" id="appIcon">
+																	<img src="../images/file.svg" title="Continuous File Allocation">
+																</div>
+																<div class="col" id="appIcon">
+																	<img src="../images/file-b.svg" title="Indexed File Allocation">
+																</div>
+																<div class="col" id="appIcon">
+																	<img src="../images/file-g.svg" title="Linked File Allocation">
+																</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+							</div>
+						</div>
+
 						</div>
 					</div>
+					<!-- main row ends -->
+			</div>
 
-					</div>
-				</div>
+			<div class="hide slideOut" id="teamPage">
+						<div id="teamHead">
+								Meet the Awesome Team
+						</div>
+						</br>
+						<div class="row teamImg">
+							<a href="https://github.com/durveshb"><img src="../images/durvesh.png" alt=""></a>
+							<a href="https://githu../images/hungry.png.com/archana98priya"><img src="../images/archana.jpeg" alt=""></a>
+							<a href="#"><img src="../images/hungry.png" alt=""></a>
+							<a href="#"><img src="../images/hungry.png" alt=""></a>
+							<a href="#"><img src="../images/hungry.png" alt=""></a>
+						</div>
+						<div class="row teamName">
+							<div class="col">Durvesh</div>
+							<div class="col">Archana</div>
+							<div class="col">Ayush</div>
+							<div class="col">Gauri</div>
+							<div class="col">Bidyadhar</div>
+						</div><div class="row teamImg">
+							<a href="#"><img src="../images/hungry.png" alt=""></a>
+							<a href="#"><img src="../images/hungry.png" alt=""></a>
+							<a href="#"><img src="../images/hungry.png" alt=""></a>
+							<a href="#"><img src="../images/hungry.png" alt=""></a>
+							<a href="#"><img src="../images/hungry.png" alt=""></a>
+						</div>
+						<div class="row teamName">
+							<div class="col">Chandrika</div>
+							<div class="col">Bhavishya</div>
+							<div class="col">Manideep</div>
+							<div class="col">Anmol</div>
+							<div class="col">Chatrapal</div>
+						</div>
+						<div id="backBtn">
+						  Back
+						</div>
+			</div>
+
 	</div>
 
 

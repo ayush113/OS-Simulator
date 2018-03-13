@@ -28,6 +28,7 @@ var counter = 0;
 
 $("#applist").click(function(){
 
+  $(this).toggleClass('flip');
   $("#appContain").toggleClass("fadeIn");
   $("#appContain").toggleClass("fadeOut");
 
@@ -47,6 +48,25 @@ $("#applist").click(function(){
   }
 });
 
+$("#teamBtn").click(function(){
+    $("#status").text("Team Page");
+    $("#teamPage").toggleClass("slideIn");
+    $("#teamPage").toggleClass("slideOut");
+    $("#homePage").toggleClass("hide");
+    $("#teamPage").toggleClass("hide");
+});
+
+$("#backBtn").click(function(){
+  $("#status").text("OS Simulator - HOME PAGE");
+  $("#teamPage").toggleClass("slideIn");
+  $("#teamPage").toggleClass("slideOut");
+  setTimeout(function()
+  {
+    $("#homePage").toggleClass("hide");
+    $("#teamPage").toggleClass("hide");
+  },500)
+});
+
 
 jQuery.fn.shake = function() {
     this.each(function(i) {
@@ -60,7 +80,7 @@ jQuery.fn.shake = function() {
 
 $("#Input").keypress(function(e){
   if(e.which == 13){
-    if($(this).val() == "password"){
+    if($(this).val() == ""){
       $(this).val("")
       $("body").css({'background' : 'url(../images/back.jpg)' , 'background-position' : 'top' , 'background-size' : 'cover'});
       $("#home").toggleClass("hide");
