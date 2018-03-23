@@ -103,6 +103,7 @@ function btnlisten(){
     if(s[4]==0){
         s[4]=1;
         y.style.background="rgb(50,205,50)";
+        x.innerHTML="Listening to port "+portS.value;
     }
     else{
         s[4]=0;
