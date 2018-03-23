@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>TCP</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width; initial-scale=1; maximum-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="tcp.css" type="text/css">
+  <!--<link rel="stylesheet" href="index.css" type="text/css"> -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+	<link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+</head>
+<body onload="load()">
+    <div class="modal-body row">
+    <div class = "col-sm-5 text-center card">
+        <h1>Server Side</h1>
+        <div class="center">
+        <div class="row">
+            <button class="btn btn-default" onclick="btnsockets()" id="btnsockets">socket()</button>
+            
+        </div>
+        <div class="row">
+            <button class="btn btn-default" onclick="btnsockopt()" id="btnsockopt">setsockopt()</button>
+        </div>
+        <div class="row" onclick="toggle()">
+            <button class="btn btn-default" onclick="btnconfigs()" id="btnconfigs">configure</button>
+        </div>
+        <div class="row" id="configure" >
+            
+               <p> sin_family:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" value="AF_INET" disabled></p>
+            
+            
+               <p> sin_port:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="portServ"></p>
+            
+            <p>
+                sin_addr.s_addr:<input type="text" id="serverAddr"></p>
+            
+        </div>
+        <div class="row">    
+            <button class="btn btn-default" onclick="btnbind()" id="btnbind">bind()</button>
+        </div>
+        <div class="row">    
+            <button class="btn btn-default" onclick="btnlisten()" id="btnlisten">listen()</button>
+        </div>
+        <div class="row">
+            <button class="btn btn-default" onclick="btnaccept()" id="btnaccept">accept()</button>
+        </div>
+        <div class="row">
+            <p id="willListen"></p>
+        </div>
+        <div class="row image" id="image">
+            <img src="../images/server.png" title="server">
+        </div>
+        <div class="row" id="responses">
+            <span>
+                Received from client:<input type="text" id="fromClient"  disabled>
+            </span>
+            <span>
+                Response to client:
+                <input type="text"  id="toClient" disabled>
+                <button class="btn btn-default"  id="sendClient" disabled onclick="msgtoClient()">send</button>
+            </span>
+        </div>
+        </div>
+
+         
+    </div>
+    <div class = "col-sm-5 text-center card">
+        <h1>Client Side</h1>
+        <div class="center">
+        <div class="row">
+            <button class="btn btn-default" onclick="btnsocketc()" id="btnsocketc">socket()</button>
+        </div>
+        <div class="row">
+            <button class="btn btn-default" onclick="toggleC()" id="toggleC">configure</button>
+        </div>
+        <div class="row" id="configureC" >
+            <p> sin_family:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" value="AF_INET" disabled></p>
+            
+            
+               <p> sin_port:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="portClient"></p>
+            
+        </div>
+        <div class="row">
+            <button class="btn btn-default" onclick="btninet()" id="btninet">inet_pton()</button>
+        </div>
+        <div class="row">
+            <p id="valuetoPTON"></p>
+        </div>
+        <div class="row">    
+            <button class="btn btn-default" onclick="btnconnect()" id="btnconnect">connect</button>
+        </div>
+        <div class="row image1" id="image1">
+            <img src="../images/client.png" title="server">
+        </div>
+        <div class="row" id="responses">
+            <span>
+                Received from server:<input type="text" disabled id="fromServer">
+            </span>
+            <span>
+                Response to server:
+                <input type="text" disabled id="toServer">
+                <button class="btn btn-default" disabled id="sendServer" onclick="msgtoServer()">send</button>
+            </span>
+        </div>
+    </div>    
+        
+    </div>
+    </div>
+	
+
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+   <!-- <script type="text/javascript" src="index.js"> -->
+    <script type="text/javascript" src="tcp.js"></script>
+    </script>
+</body>
+</html>
