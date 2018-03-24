@@ -1,5 +1,5 @@
-var s=new Array(0,0,0,0,0,0);
-var c=new Array(0,0,0,0);
+var s=new Array(0,0,0);
+var c=new Array(0,0);
 var portS,portC;
 var servAddr;
 function load(){
@@ -25,7 +25,6 @@ function toggle(){
         x.style.display = "none";
     }
 }
-
 function toggleC(){
     var x = document.getElementById("configureC");
     var y=document.getElementById("toggleC");
@@ -42,8 +41,8 @@ function toggleC(){
         c[1]=0;
         y.style.background="rgb(211,211,211)";
     }
+    
 }
-
 function btnsockets(){
     var x=document.getElementById("btnsockets");
     if(s[0]==0){
@@ -55,8 +54,11 @@ function btnsockets(){
         x.style.background="rgb(211,211,211)";
     }
 }
-function btnsockopt(){
-    var x=document.getElementById("btnsockopt");
+
+function btnconfigs(){
+    var x=document.getElementById("btnconfigs");
+    var y=document.getElementById("serverAddr");
+    y.value="inet_addr(\"\")";
     if(s[1]==0){
         s[1]=1;
         x.style.background="rgb(50,205,50)";
@@ -66,69 +68,29 @@ function btnsockopt(){
         x.style.background="rgb(211,211,211)";
     }
 }
-function btnconfigs(){
-    var x=document.getElementById("btnconfigs");
-    if(s[2]==0){
-        s[2]=1;
-        x.style.background="rgb(50,205,50)";
-    }
-    else{
-        s[2]=0;
-        x.style.background="rgb(211,211,211)";
-    }
-}
 function btnbind(){
     var x=document.getElementById("btnbind");
     portS=document.getElementById("portServ");
     servAddr=document.getElementById("serverAddr");
-    if(portS.value==""||servAddr.value==""){
+    if(portS.value==""||servAddr.value=="inet_addr(\"\")"){
         alert("Port address or Server address cant be left empty");
     }
     else{
-        if(s[3]==0){
-            s[3]=1;
+        if(s[2]==0){
+            s[2]=1;
             x.style.background="rgb(50,205,50)";
         }
         else{
-            s[3]=0;
+            s[2]=0;
             x.style.background="rgb(211,211,211)";
         }
     }
-}
-function btnlisten(){
-    var y=document.getElementById("btnlisten");
-    var x=document.getElementById("willListen");
-    portS=document.getElementById("portServ");
-    servAddr=document.getElementById("serverAddr");
-    if(s[4]==0){
-        s[4]=1;
-        y.style.background="rgb(50,205,50)";
-        x.innerHTML="Listening to port "+portS.value;
-    }
-    else{
-        s[4]=0;
-        y.style.background="rgb(211,211,211)";
-        x.innerHTML="";
-    }
-}
-function btnaccept(){
-    var x=document.getElementById("btnaccept");
-    if(s[5]==0){
-        s[5]=1;
-        x.style.background="rgb(50,205,50)";
-    }
-    else{
-        s[5]=0;
-        x.style.background="rgb(211,211,211)";
-    }
-    
-    
     checkall();
 }
 function checkall(){
     var x=document.getElementById("image");
     var y=1;
-    for(i=0;i<6;i++){
+    for(i=0;i<3;i++){
         if(s[i]!=1)
             y=0;
     }
@@ -151,8 +113,8 @@ function disablefieldsS(){
     document.getElementById("toClient").disabled=true;
     document.getElementById("sendClient").disabled=true;
 }
-//client side
 
+//client side
 function btnsocketc(){
     var x=document.getElementById("btnsocketc");
     if(c[0]==0){
@@ -164,53 +126,24 @@ function btnsocketc(){
         x.style.background="rgb(211,211,211)";
     }
 }
-
-
-
-function btninet(){
-    portC=document.getElementById("portServ");
-    portS=document.getElementById("portClient");
-    var x=document.getElementById("valuetoPTON");
-    var y=document.getElementById("btninet");
-    if(portC.value=="")
-        alert("Client port Cannot be left Empty!!")
-    else if(portC.value!=portS.value){
-        alert("Slient port and Server port doesn't match");
-    }else{
-        if(c[2]==0){
-        c[2]=1;
-        x.innerHTML="Value of "+servAddr.value+" is passed as agr";
-        y.style.background="rgb(50,205,50)";
-    }
-    else{
-        c[2]=0;
-        x.innerHTML="";
-        y.style.background="rgb(211,211,211)";
-    }
-}
-}
-function btnconnect(){
-    var x=document.getElementById("btnconnect");
-    if(c[3]==0){
-        c[3]=1;
-        x.style.background="rgb(50,205,50)";
-    }
-    else{
-        c[3]=0;
-        x.style.background="rgb(211,211,211)";
-    }
-        checkallC();
-}
 function checkallC(){
     var x=document.getElementById("image1");
+    portS=document.getElementById("portServ");
+    portC=document.getElementById("portClient");
     var y=1;
-    for(i=0;i<4;i++){
+    for(i=0;i<2;i++){
         if(c[i]!=1)
             y=0;
     }
     if(y==1){
-        x.style.background="green";
-        enablefieldsC();
+        if(portC.value!=portS.value){
+            alert("Slient port and Server port doesn't match");
+            x.style.background="red";
+            disablefieldsC();
+        }else{
+            x.style.background="green";
+            enablefieldsC();
+        }
     }
     else{
         x.style.background="red";
@@ -251,4 +184,14 @@ function msgtoServer(){
         z.value=y;
         x.value="";
     }
+}
+function memSort(e){
+    var key=e.keyCode || e.which;
+     if (key==13){
+        checkallC();
+     }
+   }
+function enableConn(){
+    var x=document.getElementById("enableConn");
+    x.innerHTML="Press Enter after entering port to setup connection";
 }
