@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/series-label.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<style>
+
+
+
+ #fr {
+ border-radius: 5px;
+ background-color: #f2f2f2;
+ opacity:0.95;
+ padding: 20px;
+ }
+ #frw {
+ border-radius: 5px;
+ background-color: #5d67f3;
+ 
+ padding: 20px;
+ }
+ input[type=text], select {
+ 
+ padding: 10px 20px;
+ 
+ 
+ border: 1px solid #ccc;
+ border-radius: 4px;
+ 
+ }
+ 
+ 
+</style>
+</head>
+
+<body  style="background-image: url('https://wallpaperscraft.ru/image/chernyy_svet_temnyy_figurki_73356_3840x2160.jpg');background-size:cover">
+<div class="container-fluid text-center" style="opacity:0.7;background-image: url('https://www.vegascustomfab.com/wp-content/uploads/2013/10/86971.jpg');background-size:cover">
+ <h1 style="color:white;font-family: Helvetica, sans-serif;padding:20px"><b>Disk Scheduling</b></h1>
+ 
+</div>
+<br>
+<br>
+
+<div class=container>
+ <form id="fr">
+ <div>
+ <span style="padding-right:50px">
+ <label ><b style="font-size:20px;padding-right:5px">Previous Request:</b></label>
+ <input type="text" id="prev_head" style="width:30%" placeposer="Previous Head Position..">
+ </span>
+ <span style="padding-left:50px;">
+ <label ><b style="font-size:20px;padding-right:10px">Current Head: </b></label>
+ <input type="text" id="head_cur" style="width:29%" placeposer="Current Head Position..">
+ </span>
+ </div>
+ <br>
+ <div>
+ <label ><b style="font-size:20px;padding-right:22px">Request queue : </b></label>
+ <input type="text" id="points" style="width:83%" placeposer="Request with spaces..">
+ </div>
+ <br>
+ <div>
+ <span style="padding-right:200px">
+ <label ><b style="font-size:20px;padding-right:15px">No. of Cylinders:</b></label>
+ <input type="text" id="cylinders" style="width:30%" placeposer="Cylinders..">
+ </span>
+ <span>
+ <select id="types_sched">
+ <option value="">----SELECT Disk Scheduling Algorithm----</option>
+ <option value="fcfs">FCFS</option>
+ <option value="sstf">SSTF</option>
+ <option value="scan">SCAN</option>
+ <option value="cscan">CSCAN</option>
+ <option value="look">LOOK</option>
+ <option value="clook">CLOOK</option>
+ </select>
+ </span>
+ </div>
+ <br>
+  <div style="text-align:center">
+
+ <button type="button" class="btn btn-info "  data-toggle="modal" data-target="#myModal" style="width:50%" onclick="executeFunc()" ><b>Submit</b></button>
+ </div>
+ </form>
+  </div> 
+ <br> 
+ 
+ <!-- <div id="contains"></div> -->
+
+
+<!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
+
+<!-- Modal -->
+
+<div id="myModal" class="modal fade" role="dialog" style="width:1100px;height:900px;opacity:0.9">
+  <div class="modal-dialog" >
+
+    <!-- Modal content-->
+    <div class="modal-content" style="width:800px">
+      <div class="modal-header">
+        
+        <h4 class="modal-title" align="center">DISK SCHEDULING</h4>
+      </div>
+      <div style="font-size:20px;color:black;padding-left:20px"> <span id="demo"></span></div> 
+
+      <div class="modal-body" id="contains" style="" >
+       <!--  <p>Some text in the modal.</p> -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<br>
+
+
+ 
+ <br>
+ 
+
+ <br><br>
+</body>
+
+
+
+<script>
+ Highcharts.createElement('link', {
+ href: 'https://fonts.googleapis.com/css?family=Signika:400,700',
+ rel: 'stylesheet',
+ type: 'text/css'
+ }, null, document.getElementsByTagName('head')[0]);
+ 
+ // Add the background image to the container
+ Highcharts.wrap(Highcharts.Chart.prototype, 'getContainer', function (proceed) {
+ proceed.call(this);
+ this.container.style.background =
+ 'url(http://www.highcharts.com/samples/graphics/sand.png)';
+ });
+ 
+ 
+ Highcharts.theme = {
+ colors: ['#f45b5b', '#8085e9', '#8d4654', '#7798BF', '#aaeeee',
+ '#ff0066', '#eeaaee', '#55BF3B', '#DF5353', '#7798BF', '#aaeeee'],
+ chart: {
+ backgroundColor: null,
+ style: {
+ fontFamily: 'Signika, serif'
+ }
+ },
+ title: {
+ style: {
+ color: 'black',
+ fontSize: '16px',
+ fontWeight: 'bold'
+ }
+ },
+ subtitle: {
+ style: {
+ color: 'black'
+ }
+ },
+ tooltip: {
+ borderWidth: 0
+ },
+ legend: {
+ itemStyle: {
+ fontWeight: 'bold',
+ fontSize: '13px'
+ }
+ },
+ xAxis: {
+ labels: {
+ style: {
+ color: '#6e6e70'
+ }
+ }
+ },
+ yAxis: {
+ labels: {
+ style: {
+ color: '#6e6e70'
+ }
+ }
+ },
+ plotOptions: {
+ series: {
+ shadow: true
+ },
+ candlestick: {
+ lineColor: '#404048'
+ },
+ map: {
+ shadow: false
+ }
+ },
+ 
+ // Highstock specific
+ navigator: {
+ xAxis: {
+ gridLineColor: '#D0D0D8'
+ }
+ },
+ rangeSelector: {
+ buttonTheme: {
+ fill: 'white',
+ stroke: '#C0C0C8',
+ 'stroke-width': 1,
+ states: {
+ select: {
+ fill: '#D0D0D8'
+ }
+ }
+ }
+ },
+ scrollbar: {
+ trackBorderColor: '#C0C0C8'
+ },
+ 
+ // General
+ background2: '#E0E0E8'
+ 
+ };
+ 
+ // Apply the theme
+ Highcharts.setOptions(Highcharts.theme);
+</script>
+<script>
+ function plotgra(txt,data,data2){
+ //data = [23,43,64,23,98]
+ Highcharts.chart('contains', {
+ 
+ title: {
+ text:txt
+ },
+ 
+
+ yAxis: {
+ title: {
+ text: ' '
+ }
+ },
+ legend: {
+ layout: 'vertical',
+ align: 'right',
+ verticalAlign: 'middle'
+ },
+ 
+ plotOptions: {
+ line: {
+ dataLabels: {
+ enabled: true
+ },
+ enableMouseTracking: true
+ },
+ series: {
+ label: {
+ connectorAllowed: true
+ }
+ }
+ },
+ 
+ series: [{
+ name: ' ',
+ data: data,
+ pointStart: 1
+ },
+ {
+ name: ' ',
+ data: data2,
+ pointStart: data.length
+ }],
+ 
+ responsive: {
+ rules: [{
+ condition: {
+ maxWidth: 500
+ },
+ chartOptions: {
+ legend: {
+ layout: 'horizontal',
+ align: 'center',
+ verticalAlign: 'bottom'
+ }
+ }
+ }]
+ }
+ 
+ });}
+</script>
+ 
+<script>
+
+ function executeFunc(){
+ var points = document.getElementById("points").value;
+ var head_cur = document.getElementById("head_cur").value;
+ var prev_head = document.getElementById("prev_head").value;
+ var cylinders = document.getElementById("cylinders").value - 1;
+ var types_sched = document.getElementById("types_sched").value;
+ //var a=[98 ,183 ,37 ,122 ,14 ,124 ,65,67];
+ //98 183 37 122 14 124 65 67
+ 
+ points = points.split(' ').map(Number);
+ head_cur = parseInt(head_cur);
+ prev_head = parseInt(prev_head);
+ cylinders = parseInt(cylinders);
+ console.log(typeof points);
+ console.log(points);
+ if(types_sched=="fcfs"){
+ document.getElementById("demo").innerHTML ='TOTAL SEEK TIME: ' + fcfs(points,head_cur);
+ }
+ else if(types_sched=="sstf"){
+ document.getElementById("demo").innerHTML = 'TOTAL SEEK TIME: ' + sstf(points,head_cur);
+ }
+ else if(types_sched=="scan"){
+ document.getElementById("demo").innerHTML = 'TOTAL SEEK TIME: ' + scan(points,head_cur,cylinders,prev_head);
+ //console.log(a);
+ }
+ else if(types_sched=="cscan"){
+ document.getElementById("demo").innerHTML = 'TOTAL SEEK TIME: ' + cscan(points,head_cur,cylinders,prev_head);
+ }
+ else if(types_sched=="look"){
+ document.getElementById("demo").innerHTML = 'TOTAL SEEK TIME: ' + look(points,head_cur,cylinders,prev_head);
+ }
+ else if(types_sched=="clook"){
+ document.getElementById("demo").innerHTML = 'TOTAL SEEK TIME: ' +clook(points,head_cur,cylinders,prev_head);
+ }
+
+ 
+ // document.getElementById("demo").innerHTML = cscan(a,53,199,63);
+ 
+ };
+
+function fcfs(arr,cur){
+ console.log(arr);
+ var i;
+ var seek=0;
+ var plot=[];
+ plot.push(cur);
+ for(i=0 ; i<arr.length; i++){
+ var k = cur -arr[i];
+ k=Math.abs(k);
+ console.log(k);
+ seek = seek + k;
+ cur=arr[i];
+ plot.push(cur);
+ }
+ plotgra("FCFS",plot);
+ return seek;
+}
+
+function sstf(arr,cur){
+ console.log(arr);
+ var i,j;
+ var seek=0;
+ var plot=[];
+ plot.push(cur);
+ for(i=0 ; i<arr.length; i++){
+ var sm=99999999,pos,k; 
+ for(j=0;j<arr.length;j++)
+ { 
+ k = cur -arr[j]; 
+ k=Math.abs(k);
+ if(k<sm)
+ {sm=k; pos=j;}
+ 
+ }
+ 
+ console.log(sm,arr[pos],cur,arr[pos]-cur);
+ seek = seek +sm;
+ cur=arr[pos];
+ plot.push(arr[pos]);
+ arr[pos]=99999999;
+ 
+ }
+ console.log(plot);
+ plotgra("SSTF",plot);
+ return seek;
+}
+
+
+function scan(arr,cur,total,pre){
+ var plot=[];
+ var seek=0;
+ plot.push(cur);
+ arr.sort(function(a, b){return a-b});
+ if(cur<=pre){
+ var temp=-1,pos=cur;
+ for(a1=0;a1<arr.length;++a1){if(arr[a1]<=cur){temp=a1;}}
+ for(a1=temp;a1>=0&&temp!=-1;--a1){
+ plot.push(arr[a1]);
+ console.log(seek);
+ seek=seek+Math.abs(pos-arr[a1]);
+ pos=arr[a1];
+ }
+ plot.push(0);
+ console.log(seek);
+ seek=seek+pos;
+ pos=0;
+ for(a1=temp+1;a1<arr.length;++a1){
+ plot.push(arr[a1]);
+ console.log(seek); 
+ seek=seek+Math.abs(pos-arr[a1]);
+ pos=arr[a1]; 
+ }
+ }
+ else{
+ var temp=-1,pos=cur;
+ for(a1=0;a1<arr.length;++a1){if(arr[a1]>=cur){temp=a1;break}}
+ for(a1=temp;a1<arr.length&&temp!=-1;++a1){
+ plot.push(arr[a1]);
+ seek=seek+Math.abs(pos-arr[a1]);
+ pos=arr[a1]; 
+ }
+ plot.push(total);
+ seek=seek+total-pos;
+ pos=total;
+ if(temp==-1)
+ temp=arr.length;
+ for(a1=temp-1;a1>=0;--a1){
+ plot.push(arr[a1]);
+ seek=seek+Math.abs(pos-arr[a1]);
+ pos=arr[a1];
+ }
+ 
+ }
+ console.log(seek);
+ console.log(plot);
+ plotgra("SCAN",plot);
+ return seek;
+ }
+
+ 
+function cscan(arr,cur,total,pre){
+ var plot=[],plot2=[];
+ var seek=0;
+ plot.push(cur);
+ arr.sort(function(a, b){return a-b});
+ if(cur<=pre){
+ var temp=-1,pos=cur;
+ for(a1=0;a1<arr.length;++a1){if(arr[a1]<=cur){temp=a1;}}
+ for(a1=temp;a1>=0&&temp!=-1;--a1){ 
+ plot.push(arr[a1]);
+ seek=seek+Math.abs(pos-arr[a1]);
+ pos=arr[a1];
+ }
+ plot.push(0);
+ seek=seek+pos;
+ pos=total;
+
+ plot2.push(total);
+ 
+ for(a1=arr.length-1;a1>temp;--a1){
+ plot2.push(arr[a1]);
+  
+ seek=seek+Math.abs(pos-arr[a1]);
+ pos=arr[a1]; 
+ }
+ }
+ else{
+ var temp=-1,pos=cur;
+ for(a1=0;a1<arr.length;++a1){if(arr[a1]>=cur){temp=a1;break;}}
+ for(a1=temp;a1<arr.length&&temp!=-1;++a1){
+ plot.push(arr[a1]);
+ seek=seek+Math.abs(pos-arr[a1]);
+ pos=arr[a1];
+ }
+ plot.push(total);
+ seek=seek+total-pos;
+ pos=0;
+ 
+ plot2.push(0);
+ if(temp==-1)
+ temp=arr.length;
+ for(a1=0;a1<temp;++a1){
+ plot2.push(arr[a1]);
+ seek=seek+Math.abs(pos-arr[a1]);
+ pos=arr[a1]; 
+ }
+ 
+ }
+
+ 
+
+ console.log(seek);
+ console.log(plot);
+ console.log(plot2);
+ plotgra("CSCAN",plot,plot2);
+ return seek;
+ }
+
+function look(arr,cur,total,pre){
+ var plot=[];
+ var seek=0;
+ plot.push(cur);
+ arr.sort(function(a, b){return a-b});
+ if(cur<=pre){
+ var temp=-1,pos=cur;
+ for(a1=0;a1<arr.length;++a1){if(arr[a1]<=cur){temp=a1;}}
+ for(a1=temp;a1>=0&&temp!=-1;--a1){
+ plot.push(arr[a1]);
+ seek=seek+Math.abs(pos-arr[a1]);
+ pos=arr[a1];
+ }
+ 
+ for(a1=temp+1;a1<arr.length;++a1){
+ plot.push(arr[a1]);
+ seek=seek+Math.abs(pos-arr[a1]);
+ pos=arr[a1]; 
+ }
+ }
+ else{
+ var temp=-1,pos=cur;
+ for(a1=0;a1<arr.length;++a1){if(arr[a1]>=cur){temp=a1;break}}
+ for(a1=temp;a1<arr.length&&temp!=-1;++a1){
+ plot.push(arr[a1]);
+ seek=seek+Math.abs(pos-arr[a1]);
+ pos=arr[a1]; 
+ }
+ if(temp==-1)
+ temp=arr.length-1;
+ for(a1=temp-1;a1>=0;--a1){
+ plot.push(arr[a1]);
+ seek=seek+Math.abs(pos-arr[a1]);
+ pos=arr[a1];
+ }
+ 
+ }
+ console.log(plot);
+ plotgra("LOOK",plot);
+ return seek;
+ }
+
+ 
+function clook(arr,cur,total,pre){
+ var plot=[],plot2=[];
+ var seek=0;
+ plot.push(cur);
+ arr.sort(function(a, b){return a-b});
+ if(cur<=pre){
+ var temp=-1,pos=cur;
+ for(a1=0;a1<arr.length;++a1){if(arr[a1]<=cur){temp=a1;}}
+ for(a1=temp;a1>=0&&temp!=-1;--a1){
+ plot.push(arr[a1]);
+ seek=seek+Math.abs(pos-arr[a1]);
+ pos=arr[a1];
+ }
+ 
+ plot2.push(arr[arr.length-1]);
+ 
+ pos=arr[arr.length-1];
+ for(a1=arr.length-2;a1>temp;--a1){
+ plot2.push(arr[a1]);
+ seek=seek+Math.abs(pos-arr[a1]);
+ pos=arr[a1]; 
+ }
+ }
+ else{
+ var temp=-1,pos=cur;
+ for(a1=0;a1<arr.length;++a1){if(arr[a1]>=cur){temp=a1;break;}}
+ for(a1=temp;a1<arr.length&&temp!=-1;++a1){
+ plot.push(arr[a1]);
+ seek=seek+Math.abs(pos-arr[a1]);
+ pos=arr[a1];
+ }
+ 
+ 
+ plot2.push(arr[0]);
+ 
+ pos=arr[0];
+ if(temp==-1)
+ temp=arr.length;
+ for(a1=1;a1<temp;++a1){
+ plot2.push(arr[a1]);
+ seek=seek+Math.abs(pos-arr[a1]);
+ pos=arr[a1]; 
+ }
+ 
+ }
+
+
+
+ console.log(seek);
+ console.log(plot);
+ console.log(plot2);
+ plotgra("CLOOK",plot,plot2);
+ return seek;
+ }
+
+
+</script>
+
+
+</html>
