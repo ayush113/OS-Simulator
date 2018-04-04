@@ -1,0 +1,320 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SimOS - Home</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width; initial-scale=1; maximum-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+  <link rel="stylesheet" href="{% static 'main/index.css'  %}" type="text/css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+	<link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+</head>
+<body onload="init()">
+
+	<div id="loginPage" class="">
+
+		<div id="log">
+			<div id="username">
+				OSsimulator
+			</div>
+			<input type="password" class="form-control" id="Input" placeholder="Password">
+		</div>
+
+	</div>
+
+	<!-- displayed only after successful login -->
+	<div id="home" class="hide">
+			<div id="statusbar">
+				<span id = "status">OS Simulator - HOME PAGE</span>
+				<span class="fakeIcons">
+					<i class="fas fa-wifi" id="fake" title="Connected to NITK-NET"></i>
+					<i class="fas fa-battery-three-quarters" id="fake" title=" 78% "></i>
+					<i class="fas fa-volume-up" id="fake"></i>
+			 </span>
+			</div>
+
+			<div class="" id="homePage" >
+				<!-- main body of the home page with two coloums -->
+				<div class="row" id="mainRow">
+					<!-- coloum for side dock -->
+					<div class="col-sm-1">
+								<!-- App drawer : on clicking reveales the list of apps -->
+								<div class="row" id="applist">
+									<img src="{% static 'main/media/menu.svg' %}" title="App menu">
+								</div>
+								<!-- icons for some selected applications -->
+								<div class="row">
+									<a href="{% url 'scheduling' %}">
+									<img src="{% static 'main/media/process.svg' %}" title="Process Scheduling">
+								</a>
+								</div>
+								<div class="row">
+									<img src="{% static 'main/media/philosopher.svg' %}" title="Dining Philosopher">
+								</div>
+								<div class="row">
+									<img src="{% static 'main/media/disk.svg' %}" title="Disk Scheduling">
+								</div>
+								<div class="row" id="teamBtn">
+									<img src="{% static 'main/media/team.svg' %}" title="About Team">
+								</div>
+								<!-- Button to log out the session -->
+								<div class="row" id="logout" >
+									<img src="{% static 'main/media/lock.svg' %}" title="Logout">
+								</div>
+					</div>
+					<!-- Coloum for date,time and watermark -->
+					<!-- contains the list of apps as well -->
+					<!-- only one of date time watermark or applist is visible at a time -->
+					<div class="col-sm-11">
+
+						<!-- Page 1 is the one that opens up on start up -->
+						<div id="page1" class="">
+							<!-- Display current date and time -->
+							<div class="datetime">
+								<div id="clock"></div>
+								<div id="date"></div>
+							</div>
+							<!-- watermark -->
+							<div id="watermark">
+								OS SIMULATION
+							</div>
+						</div>
+
+						<!-- This content is revealed when the app drawer is clicked -->
+						<!-- Contains the list of all the apps that the OS Simulator Performs  -->
+						<div id="page2" class="hide">
+							<div class="container col-sm-11 fadeOut" id="appContain">
+									<div class="apphead">
+										Apps
+									</div>
+									<br>
+									<div id="accordion">
+											<div class="card">
+												<div class="card-header" id="headingOne">
+													<h5 class="mb-0">
+														<div  data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+															Process Scheduling
+														</div>
+													</h5>
+												</div>
+
+												<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+													<div class="card-body">
+															<div class="row">
+																	<div class="col" id="appIcon">
+																		<a href="{% url 'scheduling' %}">
+																		<img src="{% static 'main/media/process.svg' %}" title="Process Scheduling">
+																	</a>
+																	</div>
+															</div>
+													</div>
+												</div>
+											</div>
+											<div class="card">
+												<div class="card-header" id="headingTwo">
+													<h5 class="mb-0">
+														<div  data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseOne">
+															Process Synchronization
+														</div>
+													</h5>
+												</div>
+
+												<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+													<div class="card-body">
+														<div class="row">
+																<div class="col" id="appIcon">
+																<a href="{% url 'producer' %}">
+																	<img src="{% static 'main/media/producer.svg' %}" title="Producer-Consumer">
+																</a>
+																</div>
+																<div class="col" id="appIcon">
+																	<a href="{% url 'reader' %}">
+																	<img src="{% static 'main/media/reader.svg' %}" title="Reader-Writer">
+																</a>
+																</div>
+																<div class="col" id="appIcon">
+																	<a href="{% url 'dining'%}">
+																	<img src="{% static 'main/media/philosopher.svg' %}" title="Dining Philosopher">
+																</a>
+																</div>
+																<div class="col" id="appIcon">
+																	<img src="{% static 'main/media/hairdresser.svg' %}" title="Sleeping Barber">
+																</div>
+														</div>
+
+													</div>
+												</div>
+											</div>
+											<div class="card">
+												<div class="card-header" id="headingThree">
+													<h5 class="mb-0">
+														<div  data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseOne">
+															DeadLock
+														</div>
+													</h5>
+												</div>
+
+												<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+													<div class="card-body">
+														<div class="row">
+																<div class="col" id="appIcon">
+																	<img src="{% static 'main/media/padlock.svg' %}" title="Deadlock">
+																</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="card">
+												<div class="card-header" id="headingFour">
+													<h5 class="mb-0">
+														<div  data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseOne">
+															Memory Management
+														</div>
+													</h5>
+												</div>
+
+												<div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+													<div class="card-body">
+														<div class="row">
+																<div class="col" id="appIcon">
+																	<a href = "{% url 'best'%}">
+																	<img src="{% static 'main/media/mft.svg' %}" title="Fixed Size">
+																</a>
+																</div>
+																<div class="col" id="appIcon">
+																	<a href="{% url 'first'%}">
+																	<img src="{% static 'main/media/mvt.svg' %}" title="Variable Size">
+																</a>
+																</div>
+																<div class="col" id="appIcon">
+																	<a href="{% url 'worst'%}">
+																	<img src="{% static 'main/media/mvt.svg' %}" title="Variable Size">
+																</a>
+																</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="card">
+												<div class="card-header" id="headingFive">
+													<h5 class="mb-0">
+														<div  data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseTwo">
+																Client-Server Architecture
+														</div>
+													</h5>
+												</div>
+												<div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+													<div class="card-body">
+														<div class="row">
+																<div class="col" id="appIcon">
+																<a href="{% url 'tcp' %}">
+																	<img src="{% static 'main/media/tcp.png' %}" title="TCP">
+																</a>
+																</div>
+																<div class="col" id="appIcon">
+																	<a href="{% url 'udp' %}">
+																	<img src="{% static 'main/media/group.svg' %}" title="UDP">
+																</a>
+																</div>
+
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="card">
+												<div class="card-header" id="headingSix">
+													<h5 class="mb-0">
+														<div data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseThree">
+															Disk scheduling
+														</div>
+													</h5>
+												</div>
+												<div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
+													<div class="card-body">
+														<div class="row">
+																<div class="col" id="appIcon">
+																	<img src="{% static 'main/media/disk.svg' %}" title="Disk Scheduling">
+																</div>
+																<div class="col" id="appIcon">
+																	<img src="{% static 'main/media/file.svg' %}" title="Continuous File Allocation">
+																</div>
+																<div class="col" id="appIcon">
+																	<img src="{% static 'main/media/file-b.svg' %}" title="Indexed File Allocation">
+																</div>
+																<div class="col" id="appIcon">
+																	<img src="{% static 'main/media/file-g.svg' %}" title="Linked File Allocation">
+																</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+							</div>
+						</div>
+
+						</div>
+					</div>
+					<!-- main row ends -->
+			</div>
+
+			<div class="hide slideOut" id="teamPage">
+						<div id="teamHead">
+								The Developers
+						</div>
+						</br>
+						<div class="row teamImg">
+							<a href="https://github.com/durveshb"><img src="{% static 'main/media/durvesh.png' %}" alt=""></a>
+							<a href="https://githu../images/hungry.png.com/archana98priya"><img src="{% static 'main/media/archana.jpeg' %}" alt=""></a>
+							<a href="https://github.com/gauribaraskar"><img src="{% static 'main/media/gauri.png' %}" alt=""></a>
+							<a href="#"><img src="{% static 'main/media/hungry.png' %}" alt=""></a>
+							<a href="#"><img src="{% static 'main/media/hungry.png' %}" alt=""></a>
+						</div>
+						<div class="row teamName">
+							<div class="col">Durvesh</div>
+							<div class="col">Archana</div>
+							<div class="col">Gauri</div>
+							<div class="col">Ayush</div>
+							<div class="col">Bidyadhar</div>
+						</div><div class="row teamImg">
+							<a href="#"><img src="{% static 'main/media/hungry.png' %}" alt=""></a>
+							<a href="#"><img src="{% static 'main/media/hungry.png' %}" alt=""></a>
+							<a href="#"><img src="{% static 'main/media/hungry.png' %}" alt=""></a>
+							<a href="#"><img src="{% static 'main/media/hungry.png' %}" alt=""></a>
+							<a href="#"><img src="{% static 'main/media/hungry.png' %}" alt=""></a>
+						</div>
+						<div class="row teamName">
+							<div class="col">Chandrika</div>
+							<div class="col">Bhavishya</div>
+							<div class="col">Manideep</div>
+							<div class="col">Anmol</div>
+							<div class="col">Chatrapal</div>
+						</div>
+						<div id="backBtn">
+						  Back
+						</div>
+			</div>
+
+	</div>
+
+
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{% static 'main/index.js'%}">
+
+    </script>
+
+    <script type="text/javascript">
+    DJANGO_STATIC_URL = '{{ STATIC_URL }}';
+</script>
+</body>
+</html>
