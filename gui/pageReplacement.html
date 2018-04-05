@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body style="padding:10px;">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+		<h1 style="text-alig var text = JSON.strn:center;">
+			Page Replacement Algorithms
+		</h1>
+	</div>
+	<br>
+	<div class="panel-body">
+		<form action="/action_page.php">
+		<div id="input">
+			<h4>Algorithm:</h4>
+				<select id="list">
+					<option value="FIFO">First In First Out</option>
+					<option value="LRU">Least Recently Used</option>
+					<option value="LFU">Least Frequently Used</option>
+					<option value="Optimal">Optimal</option>
+					<option value="Second Chance">Second Chance</option>
+				</select>	
+			</input>		
+			<h4>Page Request Queue:</h4>
+			<input type="text" class="requests form-control" placeholder="Enter requesting page numbers"></input>
+			<h4>No of frames in cache:</h4>
+			<input type="text" class="size form-control" id="csize" placeholder="Enter number of frames"></input>		
+			<!--<input type="submit" id="submit" class="submit formaction">-->
+		</div>
+		</form>
+		<button style="float:right;" id="submit" class="btn btn-primary">Submit</button>
+	</div>
+</div>
+
+<div class="frame frame-primary" id="page replacement" style="display:none;">
+	<div class="frame-heading">
+		<h2 id="topic"></h2>
+	</div>
+	<div class="frame-body" id="1">
+			<h4 id="hits"></h4>
+			<h4 id="misses"></h4>
+			<h4 id="hitrate"></h4>		
+	</div>	
+</div>
+  
+</body>
+</html>
+
+<script>
+var Q = new Array(30);	//Default value if input is not correct
+var cacheSize = 3;			//Default value if input is not correct
+var cache = new Array(10);
+var tot_hits=0;
+var tot_miss = 0;
+var rate;
+
+function FIFO()
+{
+	var i,j,flag=0;
+	var counter=0;	
+	for(i=0;i<Q.length;i++)
+	{
+		var card = document.createElement("div");
+		card.setAttribute("class", "card");
+		flag=0;
+		for(j=0;j<cacheSize;j++)
+		{
+			if(Q[i]===cache[j])
+			{
+				flag=1;
+				break;
+			}
+		}
+		var div0 = document.createElement("div");
+		div0.setAttribute("class", "request");
+		div0.innerHTML = Q[i];
+		card.appendChild(div0);
+		
+		for(j=0;j<cacheSize;++j)
+		{
+			var div1 = document.createElement("div");
+			if(cache[j]==-1)
+				div1.innerHTML = "-";
+			else
+				div1.innerHTML = cache[j];
+			card.appendChild(div1);
+		}	
+		if(flag==1)
+		{
+			var div2 = document.createElement("div");
+			div2.setAttribute("class", "hitmiss status");
+			div2.innerHTML = "Hit";	
+			card.appendChild(div2);
+			card.style="background-color:#00cc00;";
+			tot_hits++;	
+		}
+		else
+		{
+			cache[counter] = Q[i];
+			counter = (counter+1)%cacheSize;
+			var div2 = document.createElement("div");
+			div2.setAttribute("class", "hitmiss status");
+			div2.innerHTML = "Miss";	
+			card.appendChild(div2);
+			card.style="background-color:#ff1a1a;";
+			tot_miss++;
+		}
+		document.body.appendChild(card);			
+	}
+}
+
+function LRU()
+{
+	var i,j,flag,min,pos;
+	var used= new Array(10);
+	for(i=0;i<cacheSize;i++)
+		used[i]=0;
+	var time=0;
+	for(i=0;i<Q.length;i++)
+	{
+		var card = document.createElement("div");
+		card.setAttribute("class", "card");
+		flag=0;
+		++time;
+		for(j=0;j<cacheSize;j++)
+		{
+			if(Q[i]==cache[j])
+			{
+				used[j]=time;
+				flag=1;
+				break;
+			}
+		}
+		var div0 = document.createElement("div");
+		div0.setAttribute("class", "request");
+		div0.innerHTML = Q[i];
+		card.appendChild(div0);
+		
+		for(j=0;j<cacheSize;++j)
+		{
+			var div1 = document.createElement("div");
+			if(cache[j]==-1)
+				div1.innerHTML = "-";
+			else
+				div1.innerHTML = cache[j];
+			card.appendChild(div1);
+		}	
+		if(flag==1)
+		{
+			var div2 = document.createElement("div");
+			div2.setAttribute("class", "hitmiss status");
+			div2.innerHTML = "Hit";	
+			card.appendChild(div2);
+			card.style="background-color:#00cc00;";	
+			tot_hits++;	
+		}
+		else
+		{
+			min=999;
+			for(j=0;j<cacheSize;j++)
+			{
+				if(min>used[j])
+				{
+					min=used[j];
+					pos=j;
+				}
+			}
+			cache[pos]=Q[i];
+			used[pos]=time;
+			var div2 = document.createElement("div");
+			div2.setAttribute("class", "hitmiss status");
+			div2.innerHTML = "Miss";	
+			card.appendChild(div2);
+			card.style="background-color:#ff1a1a;";
+			tot_miss++;
+		}
+		document.body.appendChild(card);
+	}
+}
+
+function LFU()
+{
+	var usedcnt= new Array(10);
+    var least,repin,sofarcnt=0,bn=0;
+    var hitind,flag, pgfaultcnt=0;
+    var i,j,k;
+	
+    for(i=0; i<cacheSize; i++)
+        usedcnt[i]=0;
+
+    for(i=0; i<Q.length; i++)
+    {
+		var card = document.createElement("div");
+		card.setAttribute("class", "card");
+        flag=0;
+        for(j=0;j<cacheSize;j++)
+		{
+			if(Q[i]==cache[j])
+			{
+			    hitind=j;
+				flag=1;
+				break;
+			}
+		}
+		var div0 = document.createElement("div");
+		div0.setAttribute("class", "request");
+		div0.innerHTML = Q[i];
+		card.appendChild(div0);
+		
+		for(j=0;j<cacheSize;++j)
+		{
+			var div1 = document.createElement("div");
+			if(cache[j]==-1)
+				div1.innerHTML = "-";
+			else
+				div1.innerHTML = cache[j];
+			card.appendChild(div1);
+		}	
+		
+        if(flag==1)
+        {
+            usedcnt[hitind]++;
+            var div2 = document.createElement("div");
+			div2.setAttribute("class", "hitmiss status");
+			div2.innerHTML = "Hit";	
+			card.appendChild(div2);
+			card.style="background-color:#00cc00;";	
+			tot_hits++;	
+        }
+        else
+        {
+            pgfaultcnt++;
+            if(bn<cacheSize)
+            {
+                cache[bn]=Q[i];
+                usedcnt[bn]=usedcnt[bn]+1;
+                bn++;
+            }
+            else
+            {
+                least=9999;
+                for(k=0; k<cacheSize; k++)
+                    if(usedcnt[k]<least)
+                    {
+                        least=usedcnt[k];
+                        repin=k;
+                    }
+                cache[repin]=Q[i];
+                sofarcnt=0;
+                for(k=0; k<=i; k++)
+                    if(Q[i]==Q[k])
+                        sofarcnt=sofarcnt+1;
+                usedcnt[repin]=sofarcnt;
+            }
+            var div2 = document.createElement("div");
+			div2.setAttribute("class", "hitmiss status");
+			div2.innerHTML = "Miss";	
+			card.appendChild(div2);
+			card.style="background-color:#ff1a1a;";
+			tot_miss++;
+        }
+		document.body.appendChild(card);
+    }
+}
+
+function Optimal()
+{
+	var i,j,k,flag=0,max,pos;
+	var distance = new Array(10);
+	for(i=0;i<cacheSize;i++)
+		distance[i]=999;
+	for(i=0;i<Q.length;i++)
+	{
+		var card = document.createElement("div");
+		card.setAttribute("class", "card");
+		for(j=0;j<cacheSize;j++)
+		{
+			if(cache[j]!=-1)
+				distance[j]=0;
+			for(k=i+1;k<Q.length;k++)
+			{
+				if(Q[k]!=cache[j] && cache[j]!=-1)
+					distance[j]++;
+				else
+					break;
+			}
+		}
+		flag=0;
+		for(j=0;j<cacheSize;j++)
+		{
+			if(Q[i]==cache[j])
+			{
+				flag=1;
+				pos=j;
+				break;
+			}
+		}
+		var div0 = document.createElement("div");
+		div0.setAttribute("class", "request");
+		div0.innerHTML = Q[i];
+		card.appendChild(div0);
+		
+		for(j=0;j<cacheSize;++j)
+		{
+			var div1 = document.createElement("div");
+			if(cache[j]==-1)
+				div1.innerHTML = "-";
+			else
+				div1.innerHTML = cache[j];
+			card.appendChild(div1);
+		}	
+		if(flag==1)
+		{
+			var div2 = document.createElement("div");
+			div2.setAttribute("class", "hitmiss status");
+			div2.innerHTML = "Hit";	
+			card.appendChild(div2);
+			card.style="background-color:#00cc00;";
+			tot_hits++;	
+		}
+		else
+		{
+			max=0;
+			for(j=0;j<cacheSize;j++)
+			{
+				if(max<distance[j])
+				{
+					max=distance[j];
+					pos=j;
+				}
+			}
+			cache[pos]=Q[i];
+			var div2 = document.createElement("div");
+			div2.setAttribute("class", "hitmiss status");
+			div2.innerHTML = "Miss";	
+			card.appendChild(div2);
+			card.style="background-color:#ff1a1a;";
+			tot_miss++;
+		}
+		document.body.appendChild(card);	
+	}
+}
+
+function SecondChance()
+{
+	var i,j,k,flag;
+	var counter=0;
+	var ref=new Array(10);
+	var hitindex;
+
+	for(i=0;i<cacheSize;i++)
+        ref[i]=0;
+
+	for(i=0;i<Q.length;i++)
+	{
+		var card = document.createElement("div");
+		card.setAttribute("class", "card");
+		flag=0;
+		for(j=0;j<cacheSize;j++)
+		{
+			if(Q[i]==cache[j])
+			{
+			    hitindex=j;
+				flag=1;
+				break;
+			}
+		}
+		var div0 = document.createElement("div");
+		div0.setAttribute("class", "request");
+		div0.innerHTML = Q[i];
+		card.appendChild(div0);
+		
+		for(j=0;j<cacheSize;++j)
+		{
+			var div1 = document.createElement("div");
+			if(cache[j]==-1)
+				div1.innerHTML = "-";
+			else
+				div1.innerHTML = cache[j];
+			card.appendChild(div1);
+		}	
+		
+		if(flag==1)
+		{
+		    ref[hitindex]=(ref[hitindex]+1)%2;
+			var div2 = document.createElement("div");
+			div2.setAttribute("class", "hitmiss status");
+			div2.innerHTML = "Hit";	
+			card.appendChild(div2);
+			card.style="background-color:#00cc00;";
+			tot_hits++;
+		}
+		else
+		{
+		    var count=0;
+		    for(k=counter;count<cacheSize;k=(k+1)%cacheSize)
+            {
+                ++count;
+                if(ref[k]==1);
+                else
+                    break;
+            }
+            counter=k;
+			cache[counter]=Q[i];
+			ref[counter]=0;
+			var div2 = document.createElement("div");
+			div2.setAttribute("class", "hitmiss status");
+			div2.innerHTML = "Miss";	
+			card.appendChild(div2);
+			card.style="background-color:#ff1a1a;";
+			counter= (counter+1)%cacheSize;
+			tot_miss++;
+		}
+		document.body.appendChild(card);
+	}
+}
+
+$("#submit").click(function(){
+
+	Q = $(".requests").val().trim().split(" ");
+    cacheSize = parseInt($(".size").val().trim());
+	document.getElementById("page replacement").style.display="block";	
+	
+	var alg = document.getElementById("list");
+	var choice = alg.options[alg.selectedIndex].text;
+	document.getElementById("topic").innerHTML = choice;
+	
+	var card = document.createElement("div");
+	card.setAttribute("class", "card");
+	var div = document.createElement("div");
+	div.setAttribute("class", "request");
+	div.innerHTML = "Request :";
+	card.appendChild(div);
+	for(j=0;j<cacheSize;++j)
+	{
+		var div1 = document.createElement("div");
+		div1.innerHTML = "Cache[" + j + "]";
+		card.appendChild(div1);
+	}	
+	var div0 = document.createElement("div");
+	div0.setAttribute("class", "hitmiss status");
+	div0.innerHTML = "Status : ";
+	card.appendChild(div0);
+	
+	document.body.appendChild(card);
+	
+	var i;
+	for(i=0;i<cacheSize;i++)
+		cache[i]=-1;
+		
+	if(choice=="First In First Out")
+	{
+		FIFO();
+	}	
+	else if(choice=="Least Recently Used")
+	{	
+		LRU();
+	}	
+	else if(choice=="Least Frequently Used")
+	{	
+		LFU();
+	}	
+	else if(choice=="Optimal")
+	{	
+		Optimal();
+	}
+	else if(choice=="Second Chance")
+	{
+		SecondChance();
+	}	
+	rate = tot_hits/(tot_hits + tot_miss) * 100;
+	document.getElementById("hits").innerHTML = "Hits : " + tot_hits;
+	document.getElementById("misses").innerHTML = "Misses : " + tot_miss;
+	document.getElementById("hitrate").innerHTML = "Hit Rate : " + rate + "%";
+});
+</script>
+
+<style>
+.tab-content,.nav nav-tabs{
+  padding:30px;
+}
+
+#result{
+  margin-top: 25px;
+}
+
+#input{
+  margin: 10px;
+}
+.card{
+  position: relative;
+  border: 1px solid black;
+  float: left;
+  text-align: center;
+  width:100px;
+  margin-left: 10px;
+  margin-bottom: 20px;
+}
+.request{
+  border-bottom:  1px solid black;
+  margin-bottom: 10px;
+}
+
+.hitmiss{
+  margin-top: 10px;
+  border-top: 1px solid black;
+  color: white;
+}
+.hit{
+  background-color: green;
+}
+.miss{
+  background-color: red;
+}
+
+.status{
+  color: black;
+}
+.hidden{
+  display:none;
+}
+
+#answers{
+  display:block;
+  padding: 30px;
+}
+.ans{
+  text-transform: capitalize;
+}
+.nav.nav-tabs{
+  margin-left:10px;
+}
+h1{
+  text-align: center;
+}
+#csize{
+  width: 300px;
+  position: relative;
+  float:left;
+}
+#submit{
+  margin-left: 10px;
+}
+.proceed{
+  float: right;
+  margin-right: 10px;
+}
+
+</style>
