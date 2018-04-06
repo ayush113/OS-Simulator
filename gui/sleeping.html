@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Sleeping Barber</title>
+    <link rel="stylesheet" href="sleeping.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
+  </head>
+  <body class="body">
+    <h1 id="head">Sleeping Barber Simulation</h1>
+    <div class="row" id="mainRow">
+      <div class="col-3">
+        <div id="button">New</div>
+      </div>
+      <div class="col-3">
+        <div class="row">
+          <div class="col-2 waitList">
+
+          </div>
+          <div class="col-10">
+            <div class="waiting">
+                <img src="../images/customer.png" class="hidden" id="wait1">
+            </div>
+            <div class="waiting">
+                <img src="../images/customer.png" class="hidden" id="wait2">
+            </div>
+            <div class="waiting">
+                <img src="../images/customer.png" class="hidden" id="wait3">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+          <h1>OS Barber Shop</h1>
+          <div id="shop">
+              <img src="../images/sleepBarb.png" class="" id="sleepBarb">
+              <img src="../images/barb.png" class="hidden" id="barb">
+          </div>
+          <div id="customer">
+            <img src="../images/customer.png" class="hidden" id="cus">
+          </div>
+          <div class="status">
+             The barber is Sleeping!
+          </div>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="../lib/jQuery.min.js"></script>
+    <script type="text/javascript" src="sleeping.js"></script>
+  </body>
+</html>
