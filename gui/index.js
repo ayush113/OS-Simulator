@@ -20,6 +20,7 @@ function init(){
   startTime();
   var d = new Date();
   $("#date").html(d.toDateString());
+  
 }
 
 var counter = 0;
@@ -49,11 +50,20 @@ $("#applist").click(function(){
 });
 
 $("#teamBtn").click(function(){
+    
     $("#status").text("Team Page");
     $("#teamPage").toggleClass("slideIn");
     $("#teamPage").toggleClass("slideOut");
     $("#homePage").toggleClass("hide");
     $("#teamPage").toggleClass("hide");
+});
+$("#botBtn").click(function () {
+  document.getElementById("frame").src = 'https://webchat.botframework.com/embed/OSTESTBOT?s=SniGtUX4upo.cwA.Kfo.hWBJRQ0u-XgT_dbJk2JajovZWiX8Dehl5oC0DZGB3Ko';
+  $("#status").text("Bot page");
+  $("#botPage").toggleClass("slideIn");
+  $("#botPage").toggleClass("slideOut");
+  $("#homePage").toggleClass("hide");
+  $("#botPage").toggleClass("hide");
 });
 
 $("#backBtn").click(function(){
@@ -66,7 +76,15 @@ $("#backBtn").click(function(){
     $("#teamPage").toggleClass("hide");
   },500)
 });
-
+$("#bbackBtn").click(function () {
+  $("#status").text("OS Simulator - HOME PAGE");
+  $("#botPage").toggleClass("slideIn");
+  $("#botPage").toggleClass("slideOut");
+  setTimeout(function () {
+    $("#homePage").toggleClass("hide");
+    $("#botPage").toggleClass("hide");
+  }, 500)
+});
 
 jQuery.fn.shake = function() {
     this.each(function(i) {

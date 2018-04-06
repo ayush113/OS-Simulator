@@ -1,0 +1,47 @@
+html {
+    height: 100%;
+}
+
+body {
+  background-image: url(../images/oldback.jpg);
+  background-position: top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+  margin: none;
+  font-family: Roboto Mono;
+}
+#botHead {
+  background-color: rgba(0,0,0,0.6) ;
+  color: white;
+  text-align: center;
+  font-size: 300%;
+  font-weight: 100 !important;
+  position: relative;
+  top: 0px;
+  min-height: 50px;
+  padding: 10px;
+  border-bottom : 1px solid white;
+}
+#bbackBtn{
+  text-align: left;
+  font-size: 50%;
+}
+iframe{
+  width: 96%;
+  height: 80%;
+  background: white;
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-top: 0;
+}
+#botPage {
+  height: 96%;
+  width: 96%;
+  margin: 2%;
+  background: rgba(0, 0, 0, 0.7);
+  opacity: 1;
+  font-family: 'Lora';
+  position: absolute;
+}

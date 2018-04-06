@@ -190,12 +190,13 @@ img{
   left: 0;
   right: 0;
 }
-
+/*
 #logout {
   position: absolute;
   width : 65%;
   bottom: 0;
-}
+  margin-top: 5px;
+}*/
 
 #watermark {
       position: absolute;
@@ -267,6 +268,13 @@ img{
   opacity: 1;
   font-family: 'Lora';
 }
+#botPage {
+  height: 98%;
+  margin: 0;
+  background: rgba(0, 0, 0, 0.7);
+  opacity: 1;
+  font-family: 'Lora';
+}
 
 #teamHead {
   background-color: rgba(0,0,0,0.6) ;
@@ -278,10 +286,33 @@ img{
   top: 0px;
   min-height: 50px;
   padding: 10px;
-  margin-bottom: 30px
+  margin-bottom: 30px;
   border-bottom : 1px solid white;
 }
-
+#botHead {
+  background-color: rgba(0,0,0,0.6) ;
+  color: white;
+  text-align: center;
+  font-size: 300%;
+  font-weight: 100 !important;
+  position: relative;
+  top: 0px;
+  min-height: 50px;
+  padding: 10px;
+  border-bottom : 1px solid white;
+}
+#bbackBtn{
+  text-align: left;
+  font-size: 50%;
+}
+iframe{
+  width: 96%;
+  height: 80%;
+  background: white;
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-top: 0;
+}
 #backBtn {
   position: absolute;
   background-color: #333;

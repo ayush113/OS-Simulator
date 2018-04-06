@@ -42,6 +42,7 @@ function toggleC(){
         c[1]=0;
         y.style.background="rgb(211,211,211)";
     }
+    
 }
 
 function btnsockets(){
@@ -252,3 +253,4 @@ function msgtoServer(){
         x.value="";
     }
 }
+//<iframe src='https://webchat.botframework.com/embed/OSBot11?s=7oDaCi_r7iU.cwA.u30.dFXDljnwH2mCv0Bw-tx1wQYrplAvKYMLvYgZeBaHETM'></iframe>

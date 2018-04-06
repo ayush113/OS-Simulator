@@ -1,0 +1,164 @@
+<html>
+
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400" rel="stylesheet"> 
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+        
+        <script type="application/javascript">
+            $(document).ready(function(){
+                $("#continue").click(function(){
+                    document.getElementById("burst_times").innerHTML='<h3 style="font-weight: 100;color: white;">Enter Burst times</h3>'
+                    document.getElementById("arrival_times").innerHTML='<h3 style="font-weight: 100;color: white;">Enter Arrival times</h3>';
+                    $("#arrival_times").fadeIn();
+                    
+                    $("#simulate").fadeIn();
+                    
+                    $("#burst_times").fadeIn();
+                    var n=$("#number_of_processes").val();
+                    var i;
+                    for(i=0;i<n;i+=1)
+                    {
+                        $("#arrival_times").append("<input style='width:5%' id='arrival_time' "+i+" > ");
+                        $("#burst_times").append("<input style='width:5%' id='burst_time' "+i+" > ");   
+                    }
+                });
+                $("#rr").click(function(){
+                    $("#extra1").fadeOut(0);
+                    $("#extra2").fadeIn();
+                    document.getElementById("extra2").innerHTML='<h3 style="font-weight: 100;color: white;">Enter time quantum</h3>'
+                    $("#extra2").append("<input id='time_quantum'>")
+                });
+                
+                $("#priority").click(function(){
+                    $("#extra2").fadeOut(0);
+                    $("#extra1").fadeIn()
+                    document.getElementById("extra1").innerHTML='<h3 style="font-weight: 100;color: white;">Enter Priority</h3>'
+                    
+                    var n=$("#number_of_processes").val();
+                    var i;
+                    for(i=0;i<n;i+=1)
+                    {
+                        $("#extra1").append("<input style='width:5%' id='priority"+i+"'>")
+                    }
+                });
+                
+                $("#fcfs").click(function(){
+                    $("#extra2").fadeOut(0);
+                    $("#extra1").fadeOut(0);                    
+                });
+                
+                $("#sjf").click(function(){
+                    $("#extra2").fadeOut(0);
+                    $("#extra1").fadeOut(0);                    
+                });
+                
+            });
+        </script>
+        <style>
+        
+        a.animated-button.thar-four {
+            color: #fff;
+            cursor: pointer;
+            display: block;
+            position: relative;
+            border: 2px solid #34495e;
+            transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1);
+        0s;
+        }
+        a.animated-button.thar-four:hover {
+            color: #fff !important;
+            background-color: transparent;
+            text-shadow: nfour;
+        }
+        a.animated-button.thar-four:hover:before {
+            right: 0%;
+            left: auto;
+            width: 100%;
+        }
+        a.animated-button.thar-four:before {
+            display: block;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            height: 100%;
+            width: 0px;
+            z-index: -1;
+            content: '';
+            color: #000 !important;
+            background: #34495e;
+            transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1);
+        0s;
+        }
+        </style>
+               
+        
+    </head>
+    <body style="background-color: #1dd1a1;font-family: 'Lato', sans-serif;">
+        <h1 class="text-center" style="font-weight: 100;color:white">
+            Scheduling Algorithms
+        </h1>
+        <input style="width:25%;" class="center-block form-control" step="color:black;" id="number_of_processes"  placeholder="Enter number of processes">
+        <br>
+        <div class="col-sm-offset-5 col-sm-2 col-xs-6"> 
+            <a style="margin-left: 0px;" id="continue" class="btn btn-sm animated-button thar-four">Continue</a>
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="col-sm-12">
+            <div class="center-block" style="display:none" id="arrival_times">
+                <h3 style="font-weight: 100;color: white;">Enter arrival times</h3>
+            </div>
+            <div style="display:none" id="burst_times">
+                <h3 style="font-weight: 100;color: white;"> Enter burst times</h3>
+            </div>
+            <br><br>
+            
+        </div>
+        <div style="margin-left: 50px;" class="col-sm-2 col-xs-6"> 
+            <a style="margin-left: 0px;" id="fcfs" class="btn btn-sm animated-button thar-four">FCFS</a>
+        </div>
+
+        <div class="col-sm-2 col-sm-offset-1 col-xs-6"> 
+            <a style="margin-left: 0px;" id="priority" class="btn btn-sm animated-button thar-four">Priority</a>
+        </div>
+
+        <div class="col-sm-2 col-sm-offset-1 col-xs-6"> 
+            <a style="margin-left: 0px;" id="rr" class="btn btn-sm animated-button thar-four">Round Robin</a>
+        </div>
+
+        <div class="col-sm-2 col-sm-offset-1 col-xs-6"> 
+            <a style="margin-left: 0px;" id="sjf" class="btn btn-sm animated-button thar-four">Shortest Job First</a>
+        </div>
+        <br><br>
+        <div style="display: none;" id="extra1" class="col-sm-12">
+            
+        </div>
+        
+        <div style="display: none;" id="extra2" class="col-sm-12">
+        
+        </div>
+        <div style="display: none;" id="simulate">
+            
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div style="margin-top: 50px;" class="col-sm-offset-5 col-sm-2 col-xs-6"> 
+            <a id="rr" class="btn btn-sm animated-button thar-four">Simulate</a>
+        </div>
+        </div>
+            
+    </body>
+          
+</html>
