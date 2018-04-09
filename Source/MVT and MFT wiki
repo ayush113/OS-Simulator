@@ -1,0 +1,37 @@
+MFT
+•	Multiprogramming with fixed tasks (MFT) 
+•	Memory is divided into several fixed-size partitions. 
+•	Each partition may contain exactly one process/task.
+•	Boundaries for partitions are set at boot time and are not movable. 
+•	An input queue per partition
+•	The degree of multiprogramming is bound by the number of partitions.
+•	Potential for wasted memory space—an empty partition but no process in the associated queue
+•	Load-time address binding
+•	Single queue for all partitions
+•	Search the queue for a process when a partition becomes empty 
+•	Types of space allocation algorithms
+a.First-fit---first present partition will be allocated to te coming process
+b.best-fit---partition which is most optimum for the entering process will be occupied.
+c. worst-fit---coming process is allocated to the partition with maximum size and is  unoccupied .
+
+ISSUES of MFT
+
+•	Internal fragmentation—wasted space inside a fixedsize memory region.
+•	No sharing between processes.
+•	Load-time address binding with multiple input queues.
+
+
+MVT
+
+•	A single big block of fixed size without any fixed sized  partitions insideit  will occupy the incoming processes.Hence jobs can move from one partition to another .
+•	Dynamic address binding of processes. 
+•	No internal fragmentation.
+•	Types of space allocation algorithms
+a.First-fit--- processes will occupy the block in a contiguos fashion i.e when they encounter first empty space where they can fit in ,that space will be occupied.
+b.best-fit---partition which is most optimum for the entering process will be occupied.
+c. worst-fit---coming process is allocated to the partition with maximum size and is  unoccupied .
+
+
+ISSUES OF MVT:
+•	Introduces external fragmentation.
+
