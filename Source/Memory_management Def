@@ -1,0 +1,19 @@
+MVT (Multiprogramming with a Variable number of Tasks) is the memory management technique in which each job gets just the amount of memory it needs. That is, the partitioning of memory is dynamic and changes as jobs enter and leave the system. MVT is a more ``efficient'' user of resources. MVT suffers with external fragmentation.
+
+MFT (Multiprogramming with a Fixed number of Tasks) is one of the old memory management techniques in which the memory is partitioned into fixed size partitions and each job is assigned to a partition. The memory assigned to a partition does not change. MFT suffers with the problem of internal fragmentation.
+
+1. First Fit: In the first fit, partition is allocated which is first
+    sufficient from the top of Main Memory.
+
+2. Best Fit  Allocate the process to the partition which is first
+    smallest sufficient partition among the free available partition.
+
+3. Worst Fit  Allocate the process to the partition which is largest
+    sufficient among the freely available partitions available in
+    the main memory.
+
+External fragmentation
+External fragmentation arises when free memory is separated into small blocks and is interspersed by allocated memory.The result is that, although free storage is available, it is effectively unusable because it is divided into pieces that are too small individually to satisfy the demands of the application. The term "external" refers to the fact that the unusable storage is outside the allocated regions.
+
+Internal fragmentation
+Due to the rules governing memory allocation, more computer memory is sometimes allocated than is needed. In this scenario, the unusable memory is contained within an allocated region. This arrangement, termed fixed partitions, suffers from inefficient memory use. Any process, no matter how small, occupies an entire partition. This waste is called internal fragmentation.
