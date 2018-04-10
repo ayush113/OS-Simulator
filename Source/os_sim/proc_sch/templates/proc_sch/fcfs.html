@@ -10,7 +10,7 @@
 
         <script type="application/javascript">
             var x;
-            
+
             $(document).ready(function(){
                 $("#continue").click(function(){
                     document.getElementById("burst_times").innerHTML='<h3 style="font-weight: 100;color: white;">Enter Burst times</h3>'
@@ -65,7 +65,7 @@
                 n = $("#number_of_processes").val();
                     arrt = [];
                 brst = [];
-                
+
                 if(x=="rr")
                     {
                     for(i=0;i<n;i++)
@@ -81,9 +81,9 @@
         algo: JSON.stringify(x),timeq: tq ,at: arrt, bt: brst, number: JSON.stringify(n)},function(result){
         document.getElementsByTagName('BODY')[0].innerHTML = '';
         document.getElementsByTagName('BODY')[0].innerHTML = result['table'][0];
-    });   
+    });
                     }
-                    
+
                     else if(x=="sjf")
                     {
                         for(i=0;i<n;i++)
@@ -94,8 +94,8 @@
                         {
                 brst.push(JSON.stringify($("#burst_time" + String(i)).val()))
                         }
-                
-                    
+
+
                     $.post('/sched/processing/',{
                         algo: JSON.stringify(x),at:arrt,bt:brst,number:JSON.stringify(n)
                     },function(result){
@@ -103,7 +103,7 @@
         document.getElementsByTagName('BODY')[0].innerHTML = result['table'][0];
                     });
                     }
-                    
+
                     else if(x=="fcfs")
                     {
                         for(i=0;i<n;i++)
@@ -114,8 +114,8 @@
                         {
                 brst.push(JSON.stringify($("#burst_time" + String(i)).val()))
                         }
-                
-                    
+
+
                     $.post('/sched/processing/',{
                         algo: JSON.stringify(x),at:arrt,bt:brst,number:JSON.stringify(n)
                     },function(result){
@@ -123,7 +123,7 @@
         document.getElementsByTagName('BODY')[0].innerHTML = result['table'][0];
                     });
                     }
-                    
+
                     else if(x=="priority")
                     {
                         prior = [];
@@ -136,23 +136,23 @@
                 brst.push(JSON.stringify($("#burst_time" + String(i)).val()))
                 prior.push(JSON.stringify($("#priority" + String(i)).val()))
                         }
-    
-                        
-                
-                    
+
+
+
+
                     $.post('/sched/processing/',{
                         algo: JSON.stringify(x),at:arrt,bt:brst,priorities: prior,number:JSON.stringify(n)
                     },function(result){
                         //localStorage.setItem("result",result);
                         window.location="http://127.0.0.1:8000/sched/processing/result";
-                        
+
                         //document.getElementsByTagName('BODY')[0].innerHTML = '';
                     //document.getElementsByTagName('BODY')[0].innerHTML = result['table'][0];
                     });
                     }
-                    
-                    
-                
+
+
+
                 });
 
             });
@@ -191,6 +191,17 @@
             background: #34495e;
             transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1);
         0s;
+        }
+        #backBtn {
+          position: absolute;
+          background-color: #333;
+          color: white;
+          bottom: 10px;
+          left: 0;
+          margin: 20px;
+          border: 1px solid white;
+          padding : 5px 15px;
+          box-shadow: 1px 1px 1px white;
         }
         </style>
 
@@ -262,7 +273,9 @@
         </div>
         </div>
       </form>
-
+      <div id="backBtn" >
+        <a href="">Back</a>
+      </div>
     </body>
 
 </html>
