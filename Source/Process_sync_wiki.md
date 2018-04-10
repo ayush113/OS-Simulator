@@ -80,5 +80,27 @@ Dijkstra proposed a new and very significant technique for managing concurrent p
 
    There are three states of philosopher : THINKING, HUNGRY and EATING. Here there are two semaphores : Mutex and a semaphore array for the philosophers. Mutex is used such that no two philosophers may access the pickup or putdown at the same time. The array is used to control the behavior of each philosopher.
 
-3.<b>Producer Consumer </b><br/>     
+3.<b>Producer Consumer </b><br/>  
 
+	Producer–consumer problem (also known as the bounded-buffer problem) is a classic example of a multi-process synchronization problem. The problem describes two processes, the producer and the consumer, which share a common, fixed-size buffer used as a queue.
+	* The producer’s job is to generate data, put it into the buffer, and start again.
+	* At the same time, the consumer is consuming the data (i.e. removing it from the buffer), one piece at a time.
+	
+	Producer-consumer problem:
+	To make sure that the producer won’t try to add data into the buffer if it’s full and that the consumer won’t try to remove data from an empty buffer.
+	
+	Solution :
+	The producer is to either go to sleep or discard data if the buffer is full. The next time the consumer removes an item from the buffer, it notifies the producer, who starts to fill the buffer again. In the same way, the consumer can go to sleep if it finds the buffer to be empty. The next time the producer puts data into the buffer, it wakes up the sleeping consumer.
+	An inadequate solution could result in a deadlock where both processes are waiting to be awakened.
+	
+4.<b>Barber's Problem</b><br/>
+	
+	The sleeping barber problem is an inter-process communication and synchronization problem between multiple operating system processes. The problem is analogous to that of keeping a barber working when there are customers, resting when there are none, and doing so in an orderly manner.
+	
+	The analogy is based upon a hypothetical barber shop with one barber. The barber has one barber's chair in a cutting room and a waiting room containing a number of chairs in it. When the barber finishes cutting a customer's hair, he dismisses the customer and goes to the waiting room to see if there are others waiting. If there are, he brings one of them back to the chairs and cut their hair. If there are none, he returns to the chair and sleeps in it.
+	
+	Problem:
+	The problem is to program the barber and the customers without getting into race conditions.This problem is similar to various queueing situations, such as a multiperson helpdeskwith a computerized call waiting system for holding a limited number of incoming calls
+		
+	Solution:
+	This solution uses three semaphores, one for customers (counts waiting customers), one for the barber (idle - 0 or busy - 1) and a mutual exclusion semaphore, mutex. When the barber arrives for work, the barber procedure is executed blocking the barber on the customer semaphore until a customer arrives. When a customer arrives, the customer procedure is executed which begins by acquiring mutex to enter a critical region. Subsequent arriving customers have to wait until the first customer has released mutex. After acquiring mutex, a customer checks to see if the number of waiting customers is less than the number of chairs. If not, mutex is released and the customer leaves without a haircut. If there is an available chair, the waiting counter is incremented, the barber is awaken, the customer releases mutex, the barber grabs mutex, and begins the haircut. Once the customer's hair is cut, the customer leaves. The barber then checks to see if there is another customer. If not, the barber takes a nap.
