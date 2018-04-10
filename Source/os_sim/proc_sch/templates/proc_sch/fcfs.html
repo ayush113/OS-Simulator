@@ -1,63 +1,164 @@
+{% load static %}
 <html>
-
+<form action="{% url 'scheduling' %}" method="POST">
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400" rel="stylesheet"> 
+        <script type='text/javascript' src='{% static 'proc_sch/displaypri.js' %}'></script>
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400" rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-        
+
         <script type="application/javascript">
+            var x;
+            
             $(document).ready(function(){
                 $("#continue").click(function(){
                     document.getElementById("burst_times").innerHTML='<h3 style="font-weight: 100;color: white;">Enter Burst times</h3>'
                     document.getElementById("arrival_times").innerHTML='<h3 style="font-weight: 100;color: white;">Enter Arrival times</h3>';
                     $("#arrival_times").fadeIn();
-                    
                     $("#simulate").fadeIn();
-                    
+
                     $("#burst_times").fadeIn();
                     var n=$("#number_of_processes").val();
                     var i;
                     for(i=0;i<n;i+=1)
                     {
-                        $("#arrival_times").append("<input style='width:5%' id='arrival_time' "+i+" > ");
-                        $("#burst_times").append("<input style='width:5%' id='burst_time' "+i+" > ");   
+                        $("#arrival_times").append("<input style='width:5%' id='arrival_time"+i+"' > ");
+                        $("#burst_times").append("<input style='width:5%' id='burst_time"+i+"' > ");
                     }
                 });
                 $("#rr").click(function(){
                     $("#extra1").fadeOut(0);
                     $("#extra2").fadeIn();
                     document.getElementById("extra2").innerHTML='<h3 style="font-weight: 100;color: white;">Enter time quantum</h3>'
-                    $("#extra2").append("<input id='time_quantum'>")
+                    $("#extra2").append("<input id='time_quantum' name='whut'>")
+                    x = "rr";
                 });
-                
+
                 $("#priority").click(function(){
                     $("#extra2").fadeOut(0);
                     $("#extra1").fadeIn()
                     document.getElementById("extra1").innerHTML='<h3 style="font-weight: 100;color: white;">Enter Priority</h3>'
-                    
+
                     var n=$("#number_of_processes").val();
                     var i;
                     for(i=0;i<n;i+=1)
                     {
                         $("#extra1").append("<input style='width:5%' id='priority"+i+"'>")
                     }
+                    x="priority";
                 });
-                
+
                 $("#fcfs").click(function(){
                     $("#extra2").fadeOut(0);
-                    $("#extra1").fadeOut(0);                    
+                    $("#extra1").fadeOut(0);
+                    x="fcfs";
                 });
-                
+
                 $("#sjf").click(function(){
                     $("#extra2").fadeOut(0);
-                    $("#extra1").fadeOut(0);                    
+                    $("#extra1").fadeOut(0);
+                    x="sjf";
                 });
+
+                $("#simulate").click(function(){
+                n = $("#number_of_processes").val();
+                    arrt = [];
+                brst = [];
                 
+                if(x=="rr")
+                    {
+                    for(i=0;i<n;i++)
+                        {
+                arrt.push(JSON.stringify($("#arrival_time" + String(i)).val()))
+                        }
+                    for(i=0;i<n;i++)
+                        {
+                brst.push(JSON.stringify($("#burst_time" + String(i)).val()))
+                        }
+                        var tq=JSON.stringify($("#time_quantum").val())
+                     $.post('/sched/processing/',{
+        algo: JSON.stringify(x),timeq: tq ,at: arrt, bt: brst, number: JSON.stringify(n)},function(result){
+        document.getElementsByTagName('BODY')[0].innerHTML = '';
+        document.getElementsByTagName('BODY')[0].innerHTML = result['table'][0];
+    });   
+                    }
+                    
+                    else if(x=="sjf")
+                    {
+                        for(i=0;i<n;i++)
+                        {
+                arrt.push(JSON.stringify($("#arrival_time" + String(i)).val()))
+                        }
+                    for(i=0;i<n;i++)
+                        {
+                brst.push(JSON.stringify($("#burst_time" + String(i)).val()))
+                        }
+                
+                    
+                    $.post('/sched/processing/',{
+                        algo: JSON.stringify(x),at:arrt,bt:brst,number:JSON.stringify(n)
+                    },function(result){
+                        document.getElementsByTagName('BODY')[0].innerHTML = '';
+        document.getElementsByTagName('BODY')[0].innerHTML = result['table'][0];
+                    });
+                    }
+                    
+                    else if(x=="fcfs")
+                    {
+                        for(i=0;i<n;i++)
+                        {
+                arrt.push(JSON.stringify($("#arrival_time" + String(i)).val()))
+                        }
+                    for(i=0;i<n;i++)
+                        {
+                brst.push(JSON.stringify($("#burst_time" + String(i)).val()))
+                        }
+                
+                    
+                    $.post('/sched/processing/',{
+                        algo: JSON.stringify(x),at:arrt,bt:brst,number:JSON.stringify(n)
+                    },function(result){
+                        document.getElementsByTagName('BODY')[0].innerHTML = '';
+        document.getElementsByTagName('BODY')[0].innerHTML = result['table'][0];
+                    });
+                    }
+                    
+                    else if(x=="priority")
+                    {
+                        prior = [];
+                        for(i=0;i<n;i++)
+                        {
+                arrt.push(JSON.stringify($("#arrival_time" + String(i)).val()))
+                        }
+                    for(i=0;i<n;i++)
+                        {
+                brst.push(JSON.stringify($("#burst_time" + String(i)).val()))
+                prior.push(JSON.stringify($("#priority" + String(i)).val()))
+                        }
+    
+                        
+                
+                    
+                    $.post('/sched/processing/',{
+                        algo: JSON.stringify(x),at:arrt,bt:brst,priorities: prior,number:JSON.stringify(n)
+                    },function(result){
+                        //localStorage.setItem("result",result);
+                        window.location="http://127.0.0.1:8000/sched/processing/result";
+                        
+                        //document.getElementsByTagName('BODY')[0].innerHTML = '';
+                    //document.getElementsByTagName('BODY')[0].innerHTML = result['table'][0];
+                    });
+                    }
+                    
+                    
+                
+                });
+
             });
         </script>
         <style>
-        
+
         a.animated-button.thar-four {
             color: #fff;
             cursor: pointer;
@@ -92,16 +193,18 @@
         0s;
         }
         </style>
-               
-        
+
+
     </head>
     <body style="background-color: #1dd1a1;font-family: 'Lato', sans-serif;">
+
+        {% csrf_token %}
         <h1 class="text-center" style="font-weight: 100;color:white">
             Scheduling Algorithms
         </h1>
         <input style="width:25%;" class="center-block form-control" step="color:black;" id="number_of_processes"  placeholder="Enter number of processes">
         <br>
-        <div class="col-sm-offset-5 col-sm-2 col-xs-6"> 
+        <div class="col-sm-offset-5 col-sm-2 col-xs-6">
             <a style="margin-left: 0px;" id="continue" class="btn btn-sm animated-button thar-four">Continue</a>
         </div>
         <br>
@@ -115,33 +218,33 @@
                 <h3 style="font-weight: 100;color: white;"> Enter burst times</h3>
             </div>
             <br><br>
-            
+
         </div>
-        <div style="margin-left: 50px;" class="col-sm-2 col-xs-6"> 
+        <div style="margin-left: 50px;" class="col-sm-2 col-xs-6">
             <a style="margin-left: 0px;" id="fcfs" class="btn btn-sm animated-button thar-four">FCFS</a>
         </div>
 
-        <div class="col-sm-2 col-sm-offset-1 col-xs-6"> 
+        <div class="col-sm-2 col-sm-offset-1 col-xs-6">
             <a style="margin-left: 0px;" id="priority" class="btn btn-sm animated-button thar-four">Priority</a>
         </div>
 
-        <div class="col-sm-2 col-sm-offset-1 col-xs-6"> 
+        <div class="col-sm-2 col-sm-offset-1 col-xs-6">
             <a style="margin-left: 0px;" id="rr" class="btn btn-sm animated-button thar-four">Round Robin</a>
         </div>
 
-        <div class="col-sm-2 col-sm-offset-1 col-xs-6"> 
+        <div class="col-sm-2 col-sm-offset-1 col-xs-6">
             <a style="margin-left: 0px;" id="sjf" class="btn btn-sm animated-button thar-four">Shortest Job First</a>
         </div>
         <br><br>
         <div style="display: none;" id="extra1" class="col-sm-12">
-            
+
         </div>
-        
+
         <div style="display: none;" id="extra2" class="col-sm-12">
-        
+
         </div>
         <div style="display: none;" id="simulate">
-            
+
         <br>
         <br>
         <br>
@@ -154,11 +257,12 @@
         <br>
         <br>
         <br>
-        <div style="margin-top: 50px;" class="col-sm-offset-5 col-sm-2 col-xs-6"> 
+        <div style="margin-top: 50px;" class="col-sm-offset-5 col-sm-2 col-xs-6">
             <a id="rr" class="btn btn-sm animated-button thar-four">Simulate</a>
         </div>
         </div>
-            
+      </form>
+
     </body>
-          
+
 </html>

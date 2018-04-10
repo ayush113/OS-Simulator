@@ -9,3 +9,9 @@ def producer(request):
 
 def reader(request):
     return render(request,'proc_sync/ReaderWriter.html')
+
+def sleep(request):
+    return render(request,'proc_sync/sleeping.html')
+
+def cigarette(request):
+    return render(request,'proc_sync/cigarette_smoker.html')

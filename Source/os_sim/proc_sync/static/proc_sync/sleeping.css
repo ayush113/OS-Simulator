@@ -1,0 +1,112 @@
+
+#head {
+  text-align: center;
+  font-size: 450%;
+  padding: 0px 0 20px 0;
+  font-family: 'Jua', sans-serif;
+}
+
+.body {
+  background-color: #b2d3a8;
+}
+
+.status {
+  height:  100px;
+  width: 80%;
+  border : 2px solid black;
+  border-radius: 5px;
+  text-align: center;
+  padding-top: 9px;
+  position: relative;
+  top : -260px;
+  right : -70px;
+
+  font-size: 25px;
+
+}
+
+.waitList {
+  height : 540px;
+  width : 40px;
+  border : 1px solid black;
+  border-radius: 5px;
+  background: #453532
+}
+
+.col-6 h1{
+  margin : 10px 40px;
+  padding: 10px 30px 10px 30px;
+  border : 2px solid black;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.waiting {
+  height: 160px;
+  width: 160px;
+  border-radius: 50%;
+  border: 1px solid black;
+  margin : 20px auto;
+}
+
+.waiting img {
+  height: 157px;
+  width: 157px;
+  border-radius: 50%;
+}
+
+.hidden {
+  display : none;
+}
+
+#mainRow {
+  width : 85%;
+  height: 80%;
+  margin-left: 40px;
+}
+
+
+#button {
+  height: 120px;
+  width: 120px;
+  border-radius: 50%;
+  background: steelblue;
+  color : white;
+  padding-top: 45px;
+  text-align: center;
+
+  margin: 0 auto;
+  margin-top: 220px;
+
+}
+
+#shop {
+  height: 280px;
+  width: 280px;
+  border-radius: 50%;
+  border: 1px solid black;
+  margin : 90px auto;
+  position: relative;
+  top : -60px;
+}
+
+#shop img {
+  height: 280px;
+  width: 280px;
+  border-radius: 50%;
+}
+
+#customer {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  position: relative;
+  top : -280px;
+  right : -280px;
+}
+
+#customer img {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+}

@@ -23,5 +23,7 @@ urlpatterns = [
     path('sync/',include('proc_sync.urls')),
     path('mem/',include('memory_man.urls')),
     path('sched/',include('proc_sch.urls')),
-    path('chatting/',include('chat.urls'))
+    path('chatting/',include('chat.urls')),
+    path('others/',include('others.urls')),
+    path('dead/',include('bankers.urls'))
 ]

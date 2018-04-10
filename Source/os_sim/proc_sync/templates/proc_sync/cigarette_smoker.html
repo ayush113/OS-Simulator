@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body style="background-image: url(https://images7.alphacoders.com/355/355444.jpg); background-size:cover;background-color:#ccccff">
+  <!--  ; jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <div class="container-fluid">
+    <center><h1 >Simulation of the Cigarette Smoker's semaphore</h1></center>
+   
+   <button type ="button", class = "btn-lg btn-danger", onclick ="beg()", style="position:absolute;top:45%;left:10%;font-size:25px"  >Start</button>
+
+
+
+    <button type = "button", id ="ag", name = "one", style="font-size: 150%;height:125px;width:125px;position:absolute;bottom:4%;left:35%;border-radius:100px;background-color:#f2f2f2"> Agent </button>
+
+    <button type = "button", id ="p1", style="font-size: 150%;height:80px;width:120px;position:absolute;bottom:25%;left:20%;background-color:#f2f2f2"> Paper ; Tobacoo </button>
+    <button type = "button", id ="p2", style="font-size: 150%;height:80px;width:120px;position:absolute;bottom:25%;left:35%;background-color:#f2f2f2"> Matches ; Tobacoo </button>
+    <button type = "button", id ="p3", style="font-size: 150%;height:80px;width:120px;position:absolute;bottom:25%;left:50%;background-color:#f2f2f2"> Paper ; Matches </button>
+
+
+
+
+    <button type = "button", id ="s1",  style="font-size: 150%;height:125px;width:125px;position:absolute;top:22%;left:20%;border-radius:150px; background-color:#f2f2f2"> Smoker with Matches </button>
+
+
+    <button type = "button", id ="s2",  style="font-size: 150%;height:125px;width:125px;position:absolute;top:22%;left:35%;border-radius:150px; background-color:#f2f2f2"> Smoker with Paper </button>
+
+
+    <button type = "button", id ="s3", style="font-size: 150%;height:125px;width:125px;position:absolute;top:22%;left:50%;border-radius:150px; background-color:#f2f2f2"> Smoker with Tobacoo </button>
+
+
+
+
+    <script type = "text/javascript">
+
+      var sm= [ 0,0,0];
+      var fn=0;
+      var start=2*2500;
+      n=2;
+
+      function initiate()
+      {
+          var num = Math.random();
+          var n = Math.floor(num*3);
+        // n=0;
+
+
+         if(fn==1)
+         {
+
+              if(sm[0]==0)
+              {
+              document.getElementById("s1").style.backgroundColor = '#ffaa80';
+              setTimeout(function(){ 
+
+              document.getElementById("s1").style.backgroundColor = '#a6ff4d';
+              
+              sm[0]=1;
+              
+              setTimeout(function(){ 
+              document.getElementById("s1").style.backgroundColor = '#f2f2f2';
+              sm[0]=0;
+                }, 5*500);
+
+              document.getElementById("p1").style.backgroundColor = '#f2f2f2';
+             // document.getElementById("ag").style.backgroundColor = '#a6ff4d';
+              fn=0;
+              
+             }, 3*500);
+            }
+
+
+         } 
+
+         if(fn==2)
+         {
+            if(sm[1]==0)
+              {
+              document.getElementById("s2").style.backgroundColor = '#ffaa80';
+              setTimeout(function(){ 
+
+              document.getElementById("s2").style.backgroundColor = '#a6ff4d';
+              
+              sm[0]=1;
+              
+              setTimeout(function(){ 
+              document.getElementById("s2").style.backgroundColor = '#f2f2f2';
+              sm[0]=0;
+                }, 5*500);
+
+              document.getElementById("p2").style.backgroundColor = '#f2f2f2';
+             // document.getElementById("ag").style.backgroundColor = '#a6ff4d';
+              fn=0;
+              
+             }, 3*500); }
+
+         }
+          
+         if(fn==3)
+         {
+
+            if(sm[2]==0){
+              document.getElementById("s3").style.backgroundColor = '#ffaa80';
+              setTimeout(function(){ 
+
+              document.getElementById("s3").style.backgroundColor = '#a6ff4d';
+              
+              sm[2]=1;
+              
+              setTimeout(function(){ 
+              document.getElementById("s3").style.backgroundColor = '#f2f2f2';
+              //document.getElementById("ag").style.backgroundColor = '#a6ff4d';
+              sm[2]=0;
+                }, 5*500);
+
+              document.getElementById("p3").style.backgroundColor = '#f2f2f2';
+             // document.getElementById("ag").style.backgroundColor = '#a6ff4d';
+              fn=0;
+              
+             }, 3*500); }
+
+         }
+        
+         if(fn==0)
+         {
+            
+          if(n==0)
+          {
+            fn=1;
+              document.getElementById("ag").style.backgroundColor = '#f2f2f2';
+              document.getElementById("p1").style.backgroundColor = '#ffff66';
+              
+
+              if(sm[0]==0)
+              {
+              document.getElementById("s1").style.backgroundColor = '#ffaa80';
+              setTimeout(function(){ 
+
+              document.getElementById("s1").style.backgroundColor = '#a6ff4d';
+              
+              sm[0]=1;
+              
+              setTimeout(function(){ 
+              document.getElementById("s1").style.backgroundColor = '#f2f2f2';
+              document.getElementById("ag").style.backgroundColor = '#ffaa80';
+              sm[0]=0;
+                }, 5*500);
+
+              document.getElementById("p1").style.backgroundColor = '#f2f2f2';
+             // document.getElementById("ag").style.backgroundColor = '#a6ff4d';
+              fn=0;
+              
+             }, 3*500);
+             
+             }
+
+          }
+
+
+
+          if(n==1)
+          { 
+             fn=2;
+              document.getElementById("p2").style.backgroundColor = '#ffff66';
+              document.getElementById("ag").style.backgroundColor = '#f2f2f2';
+               
+              if(sm[1]==0)
+              {
+              document.getElementById("s2").style.backgroundColor = '#ffaa80';
+              setTimeout(function(){ 
+
+              document.getElementById("s2").style.backgroundColor = '#a6ff4d';
+              
+              sm[1]=1;
+              
+              setTimeout(function(){ 
+              document.getElementById("s2").style.backgroundColor = '#f2f2f2';
+              document.getElementById("ag").style.backgroundColor = '#ffaa80';
+              sm[1]=0;
+                }, 5*500);
+
+              document.getElementById("p2").style.backgroundColor = '#f2f2f2';
+            //  document.getElementById("ag").style.backgroundColor = '#a6ff4d';
+              fn=0;
+              
+             }, 3*500); }
+
+          }
+
+
+
+          if(n==2)
+          {  
+              fn=3;
+              document.getElementById("p3").style.backgroundColor = '#ffff66';
+              document.getElementById("ag").style.backgroundColor = '#f2f2f2';
+               
+              if(sm[2]==0){
+              document.getElementById("s3").style.backgroundColor = '#ffaa80';
+              setTimeout(function(){ 
+
+              document.getElementById("s3").style.backgroundColor = '#a6ff4d';
+              
+              sm[2]=1;
+              
+              setTimeout(function(){ 
+              document.getElementById("s3").style.backgroundColor = '#f2f2f2';
+              document.getElementById("ag").style.backgroundColor = '#ffaa80';
+              sm[2]=0;
+                }, 5*500);
+
+              document.getElementById("p3").style.backgroundColor = '#f2f2f2';
+            //  document.getElementById("ag").style.backgroundColor = '#a6ff4d';
+              fn=0;
+              
+             }, 3*500); }
+
+          }
+
+         }
+        
+      }
+
+      function beg(){
+        initiate();
+        setInterval(initiate,start);
+     //initiate();
+  
+      }
+
+    </script>
+
+    <!-- <p style="position:absolute;top:60%;left:79%;font-size:22px"><b> For Philosopher: </b></p>
+    ( smoker and agent ) or item not on table --><button type = "button", style="height:25px;width:25px;position:absolute;top:65%;left:75%;background-color:#f2f2f2"> </button>
+    <p style="position:absolute;top:65%;left:78%;font: italic bold 12px/30px Georgia, serif;font-size:20px"> Sleeping (smoker or agent) or item not on table </p>
+ <!--    <button type = "button", style="height:25px;width:25px;position:absolute;top:70%;left:80%;background-color:#f2f2f2"> </button>
+    <p style="position:absolute;top:70%;left:82%;font-size:20px"> Sleeping  </p><br><br> -->
+    <button type = "button", style="height:25px;width:25px;position:absolute;top:75%;left:75%;background-color:#ffff66"> </button>
+    <p style="position:absolute;top:75%;left:78%;font: italic bold 12px/30px Georgia, serif;font-size:20px"> put item on table </p>
+   <!--  <p style="position:absolute;top:80%;left:79%;font-size:22px"><b> For Chopsticks: </b></p> -->
+    <button type = "button", style="height:25px;width:25px;position:absolute;top:80%;left:75%;background-color:#ffaa80"> </button>
+    <p style="position:absolute;top:80%;left:78%;font: italic bold 12px/30px Georgia, serif;font-size:20px"> wakes up  </p>
+    <button type = "button", style="height:25px;width:25px;position:absolute;top:85%;left:75%;background-color:#a6ff4d"> </button>
+    <p style="position:absolute;top:85%;left:78%;font: italic bold 12px/30px Georgia, serif;font-size:20px"> Smoking </p>
+
+  </div>
+</body>

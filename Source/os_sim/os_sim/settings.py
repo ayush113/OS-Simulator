@@ -42,7 +42,9 @@ INSTALLED_APPS = [
     'proc_sync',
     'memory_man',
     'proc_sch',
-    'chat'
+    'chat',
+    'others',
+    'bankers'
 ]
 
 MIDDLEWARE = [

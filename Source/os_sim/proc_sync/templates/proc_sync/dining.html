@@ -7,14 +7,23 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 
-<body style="background-color:#DAF7A6">
+<body style="background-color:#FFF">
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <div id="statusbar">
+        <span id = "status">OS Simulator - Dining Philosopher's Problem</span>
+        <span class="fakeIcons">
+          <i class="fas fa-wifi" id="fake" title="Connected to NITK-NET"></i>
+          <i class="fas fa-battery-three-quarters" id="fake" title=" 78% "></i>
+          <i class="fas fa-volume-up" id="fake"></i>
+       </span>
+      </div>
   <div class="container-fluid">
 
     <center><h1>Dining Philosopher's Problem</h1></center>
+
     <button type ="button", class = "btn btn-primary", onclick ="initiate()", style="height:50px;width:200px;position:absolute;top:15%;left:80%;font-size:25px"  >Next</button>
 
     <button type = "button", id ="num", name = "num", class = "btn btn-primary", style="height:50px;width:300px;position:absolute;top:25%;left:75%;font-size:17px">Random number generated: </button>
