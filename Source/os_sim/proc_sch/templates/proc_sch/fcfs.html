@@ -6,6 +6,8 @@
         <script type='text/javascript' src='{% static 'proc_sch/displaypri.js' %}'></script>
         <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400" rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+      	<link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
 
 
         <script type="application/javascript">
@@ -203,12 +205,36 @@
           padding : 5px 15px;
           box-shadow: 1px 1px 1px white;
         }
+
+        #statusbar {
+          background: linear-gradient( rgba(0, 0, 0, 0.5) , rgba(0, 0, 0, 0.7));
+          color : white;
+          padding: 1px 20px 1px 20px;
+          box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+        }
+        .fakeIcons {
+          float: right;
+          height: 13px;
+        }
+
+        #fake {
+          margin: 5px;
+          size : 50px;
+          height: 100%;
+        }
         </style>
 
 
     </head>
     <body style="background-color: #1dd1a1;font-family: 'Lato', sans-serif;">
-
+      <div id="statusbar">
+        <span id = "status">OS Simulator - Process Synchronization</span>
+        <span class="fakeIcons">
+          <i class="fas fa-wifi" id="fake" title="Connected to NITK-NET"></i>
+          <i class="fas fa-battery-three-quarters" id="fake" title=" 78% "></i>
+          <i class="fas fa-volume-up" id="fake"></i>
+        </span>
+      </div>
         {% csrf_token %}
         <h1 class="text-center" style="font-weight: 100;color:white">
             Scheduling Algorithms
