@@ -3,15 +3,41 @@
 <form action="{% url 'scheduling' %}" method="POST">
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script type='text/javascript' src='{% static 'proc_sch/displaypri.js' %}'></script>
+        <script type='text/javascript' src='{% static 'proc_sch/inputpri.js' %}'></script>
+  <script type='text/javascript' src='{% static 'proc_sch/displaypri.js' %}'></script>
+  <link rel="stylesheet" href='{% static 'proc_sch/demo1.css' %}'>
         <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400" rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-      	<link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
 
 
         <script type="application/javascript">
             var x;
+
+            function printing(result){
+                //alert(String(result));
+    //var result =   localStorage.getItem("result");
+    //    alert(String(result));
+    //console.log(text);
+    //$.post('/process/gateway/',{value:text, algo:alg}, function(result){
+      sequence = result["gantt"];
+      a = result["table"];
+      avgwt =0;
+      avgtat =0;
+      for(i=0;i<a.length;++i){
+        avgwt += a[i].wt;
+        avgtat += a[i].tat;
+      }
+      total = sequence.length;
+      pixel = 0;
+      i = 0;
+      $('#outer-div,#comments,#ptable,#gantth').empty();
+      // $('#thead').append('<th>PNO.</th> <th>Arrival time</th>  <th>Burst time</th>  <th>Completion time</th>  <th>Waiting time</th>  <th>Turn-around time</th>');
+      totalTime = sequence[total-1].stop;
+      pixel = parseInt(800/totalTime);
+      containerWidth = pixel*totalTime + 2;
+      $('#outer-div').css('width',containerWidth+'px');
+      displayBlock(i);
+            }
 
             $(document).ready(function(){
                 $("#continue").click(function(){
@@ -81,8 +107,10 @@
                         var tq=JSON.stringify($("#time_quantum").val())
                      $.post('/sched/processing/',{
         algo: JSON.stringify(x),timeq: tq ,at: arrt, bt: brst, number: JSON.stringify(n)},function(result){
-        document.getElementsByTagName('BODY')[0].innerHTML = '';
-        document.getElementsByTagName('BODY')[0].innerHTML = result['table'][0];
+        $("#main").toggleClass("hide");
+                        $("#res").toggleClass("hide");
+                        $("body").css({'background-color': '#ffffff'  })
+                        printing(result)
     });
                     }
 
@@ -101,8 +129,10 @@
                     $.post('/sched/processing/',{
                         algo: JSON.stringify(x),at:arrt,bt:brst,number:JSON.stringify(n)
                     },function(result){
-                        document.getElementsByTagName('BODY')[0].innerHTML = '';
-        document.getElementsByTagName('BODY')[0].innerHTML = result['table'][0];
+                        $("#main").toggleClass("hide");
+                        $("#res").toggleClass("hide");
+                        $("body").css({'background-color': '#ffffff'  })
+                        printing(result)
                     });
                     }
 
@@ -121,8 +151,10 @@
                     $.post('/sched/processing/',{
                         algo: JSON.stringify(x),at:arrt,bt:brst,number:JSON.stringify(n)
                     },function(result){
-                        document.getElementsByTagName('BODY')[0].innerHTML = '';
-        document.getElementsByTagName('BODY')[0].innerHTML = result['table'][0];
+                        $("#main").toggleClass("hide");
+                        $("#res").toggleClass("hide");
+                        $("body").css({'background-color': '#ffffff'  })
+                        printing(result)
                     });
                     }
 
@@ -146,7 +178,11 @@
                         algo: JSON.stringify(x),at:arrt,bt:brst,priorities: prior,number:JSON.stringify(n)
                     },function(result){
                         //localStorage.setItem("result",result);
-                        window.location="http://127.0.0.1:8000/sched/processing/result";
+                        //window.location="http://127.0.0.1:8000/sched/processing/result";
+                        $("#main").toggleClass("hide");
+                        $("#res").toggleClass("hide");
+                        $("body").css({'background-color': '#ffffff'  })
+                        printing(result)
 
                         //document.getElementsByTagName('BODY')[0].innerHTML = '';
                     //document.getElementsByTagName('BODY')[0].innerHTML = result['table'][0];
@@ -194,7 +230,7 @@
             transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1);
         0s;
         }
-        #backBtn {
+            #backBtn {
           position: absolute;
           background-color: #333;
           color: white;
@@ -222,19 +258,69 @@
           size : 50px;
           height: 100%;
         }
+
         </style>
 
 
     </head>
     <body style="background-color: #1dd1a1;font-family: 'Lato', sans-serif;">
-      <div id="statusbar">
-        <span id = "status">OS Simulator - Process Synchronization</span>
+        <div id="statusbar" class="row">
+        <span id = "status">OS Simulator - Process Scheduling</span>
         <span class="fakeIcons">
           <i class="fas fa-wifi" id="fake" title="Connected to NITK-NET"></i>
           <i class="fas fa-battery-three-quarters" id="fake" title=" 78% "></i>
           <i class="fas fa-volume-up" id="fake"></i>
         </span>
       </div>
+
+        <div class="hide" id="res">
+
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3>
+                        Gantt chart
+                    </h3>
+                </div>
+            <div id="gantth"></div>
+    <br><br>
+        <div id="outer-div">
+        </div>
+    <br><br>
+            </div>
+    <div class="panel panel-warning" style="width:50%;float:left;">
+    <div class="panel-heading">
+  	 <h3>Operations Taking Place</h3>
+    </div>
+    <div id="comments" class="panel-content">
+    </div>
+            </div>
+    <div class="panel panel-warning" style="width:50%;float:left;">
+    <div class="panel-heading">
+  	 <h3>Table</h3>
+    </div>
+  	 <div class="panel-content">
+	   <table id="ptab" class="table table-bordered">
+ 	  <thead>
+ 	  <tr id="thead">
+ 	  <th>PNO.</th>
+    <th>Priority</th>
+	   <th>Arrival time</th>
+	<th>Burst time</th>
+	<th>Completion time</th>
+	<th>Waiting time</th>
+	<th>Turn-around time</th>
+	</tr>
+	<tbody id="ptable">
+
+	</tbody>
+	</thead>
+	</table>
+  	</div>
+  	</div>
+
+        </div>
+
+    <div id="main">
         {% csrf_token %}
         <h1 class="text-center" style="font-weight: 100;color:white">
             Scheduling Algorithms
@@ -299,8 +385,9 @@
         </div>
         </div>
       </form>
-      <div id="backBtn" >
-        <a href="">Back</a>
+    </div>
+    <div id="backBtn" >
+        <a href="{% url 'index2'%}">Back</a>
       </div>
     </body>
 

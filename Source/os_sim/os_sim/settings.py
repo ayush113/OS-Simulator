@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'proc_sch',
     'chat',
     'others',
-    'bankers'
+    'bankers',
+    'fileman'
 ]
 
 MIDDLEWARE = [

@@ -9,3 +9,9 @@ def first(request):
 
 def worst(request):
     return render(request,'memory_man/worst.html')
+
+def mvt(request):
+    return render(request,'memory_man/get_data.html')
+
+def mvt2(request):
+    return render(request,'memory_man/show_demo.html')

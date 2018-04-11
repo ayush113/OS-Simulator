@@ -4,14 +4,14 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 
-<body style="background-image: url(https://images7.alphacoders.com/355/355444.jpg); background-size:cover;background-color:#ccccff">
+<body style="background-color:#e6faff">
   <!--  ; jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <div class="container-fluid">
     <center><h1 >Simulation of the Cigarette Smoker's semaphore</h1></center>
-   
+
    <button type ="button", class = "btn-lg btn-danger", onclick ="beg()", style="position:absolute;top:45%;left:10%;font-size:25px"  >Start</button>
 
 
@@ -56,13 +56,13 @@
               if(sm[0]==0)
               {
               document.getElementById("s1").style.backgroundColor = '#ffaa80';
-              setTimeout(function(){ 
+              setTimeout(function(){
 
               document.getElementById("s1").style.backgroundColor = '#a6ff4d';
-              
+
               sm[0]=1;
-              
-              setTimeout(function(){ 
+
+              setTimeout(function(){
               document.getElementById("s1").style.backgroundColor = '#f2f2f2';
               sm[0]=0;
                 }, 5*500);
@@ -70,25 +70,25 @@
               document.getElementById("p1").style.backgroundColor = '#f2f2f2';
              // document.getElementById("ag").style.backgroundColor = '#a6ff4d';
               fn=0;
-              
+
              }, 3*500);
             }
 
 
-         } 
+         }
 
          if(fn==2)
          {
             if(sm[1]==0)
               {
               document.getElementById("s2").style.backgroundColor = '#ffaa80';
-              setTimeout(function(){ 
+              setTimeout(function(){
 
               document.getElementById("s2").style.backgroundColor = '#a6ff4d';
-              
+
               sm[0]=1;
-              
-              setTimeout(function(){ 
+
+              setTimeout(function(){
               document.getElementById("s2").style.backgroundColor = '#f2f2f2';
               sm[0]=0;
                 }, 5*500);
@@ -96,23 +96,23 @@
               document.getElementById("p2").style.backgroundColor = '#f2f2f2';
              // document.getElementById("ag").style.backgroundColor = '#a6ff4d';
               fn=0;
-              
+
              }, 3*500); }
 
          }
-          
+
          if(fn==3)
          {
 
             if(sm[2]==0){
               document.getElementById("s3").style.backgroundColor = '#ffaa80';
-              setTimeout(function(){ 
+              setTimeout(function(){
 
               document.getElementById("s3").style.backgroundColor = '#a6ff4d';
-              
+
               sm[2]=1;
-              
-              setTimeout(function(){ 
+
+              setTimeout(function(){
               document.getElementById("s3").style.backgroundColor = '#f2f2f2';
               //document.getElementById("ag").style.backgroundColor = '#a6ff4d';
               sm[2]=0;
@@ -121,31 +121,31 @@
               document.getElementById("p3").style.backgroundColor = '#f2f2f2';
              // document.getElementById("ag").style.backgroundColor = '#a6ff4d';
               fn=0;
-              
+
              }, 3*500); }
 
          }
-        
+
          if(fn==0)
          {
-            
+
           if(n==0)
           {
             fn=1;
               document.getElementById("ag").style.backgroundColor = '#f2f2f2';
               document.getElementById("p1").style.backgroundColor = '#ffff66';
-              
+
 
               if(sm[0]==0)
               {
               document.getElementById("s1").style.backgroundColor = '#ffaa80';
-              setTimeout(function(){ 
+              setTimeout(function(){
 
               document.getElementById("s1").style.backgroundColor = '#a6ff4d';
-              
+
               sm[0]=1;
-              
-              setTimeout(function(){ 
+
+              setTimeout(function(){
               document.getElementById("s1").style.backgroundColor = '#f2f2f2';
               document.getElementById("ag").style.backgroundColor = '#ffaa80';
               sm[0]=0;
@@ -154,9 +154,9 @@
               document.getElementById("p1").style.backgroundColor = '#f2f2f2';
              // document.getElementById("ag").style.backgroundColor = '#a6ff4d';
               fn=0;
-              
+
              }, 3*500);
-             
+
              }
 
           }
@@ -164,21 +164,21 @@
 
 
           if(n==1)
-          { 
+          {
              fn=2;
               document.getElementById("p2").style.backgroundColor = '#ffff66';
               document.getElementById("ag").style.backgroundColor = '#f2f2f2';
-               
+
               if(sm[1]==0)
               {
               document.getElementById("s2").style.backgroundColor = '#ffaa80';
-              setTimeout(function(){ 
+              setTimeout(function(){
 
               document.getElementById("s2").style.backgroundColor = '#a6ff4d';
-              
+
               sm[1]=1;
-              
-              setTimeout(function(){ 
+
+              setTimeout(function(){
               document.getElementById("s2").style.backgroundColor = '#f2f2f2';
               document.getElementById("ag").style.backgroundColor = '#ffaa80';
               sm[1]=0;
@@ -187,7 +187,7 @@
               document.getElementById("p2").style.backgroundColor = '#f2f2f2';
             //  document.getElementById("ag").style.backgroundColor = '#a6ff4d';
               fn=0;
-              
+
              }, 3*500); }
 
           }
@@ -195,20 +195,20 @@
 
 
           if(n==2)
-          {  
+          {
               fn=3;
               document.getElementById("p3").style.backgroundColor = '#ffff66';
               document.getElementById("ag").style.backgroundColor = '#f2f2f2';
-               
+
               if(sm[2]==0){
               document.getElementById("s3").style.backgroundColor = '#ffaa80';
-              setTimeout(function(){ 
+              setTimeout(function(){
 
               document.getElementById("s3").style.backgroundColor = '#a6ff4d';
-              
+
               sm[2]=1;
-              
-              setTimeout(function(){ 
+
+              setTimeout(function(){
               document.getElementById("s3").style.backgroundColor = '#f2f2f2';
               document.getElementById("ag").style.backgroundColor = '#ffaa80';
               sm[2]=0;
@@ -217,20 +217,20 @@
               document.getElementById("p3").style.backgroundColor = '#f2f2f2';
             //  document.getElementById("ag").style.backgroundColor = '#a6ff4d';
               fn=0;
-              
+
              }, 3*500); }
 
           }
 
          }
-        
+
       }
 
       function beg(){
         initiate();
         setInterval(initiate,start);
      //initiate();
-  
+
       }
 
     </script>

@@ -1,0 +1,188 @@
+<html>
+
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400" rel="stylesheet"> 
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+        
+        <script type="application/javascript">
+            var x;
+            $(document).ready(function(){
+                
+                $("#continue").click(function(){
+                    alert("MY GOD")
+                    document.getElementById("file_size").innerHTML='<h3 style="font-weight: 100;color: white;">Enter file sizes</h3>'
+                    document.getElementById("file_name").innerHTML='<h3 style="font-weight: 100;color: white;">Enter file names</h3>';
+                    $("#file_name").fadeIn();
+                    
+                    $("#simulate").fadeIn();
+                    
+                    $("#file_size").fadeIn();
+                    var n=$("#number_of_files").val();
+                    var i;
+                    for(i=0;i<n;i+=1)
+                    {
+                        $("#file_name").append("<input style='width:5%' id='file_name"+i+"' > ");
+                        $("#file_size").append("<input style='width:5%' id='file_size"+i+"' > ");   
+                    }
+                });
+                $("#index").click(function(){
+                    $("#extra1").fadeOut(0);
+                    $("#extra2").fadeIn();
+                    document.getElementById("extra2").innerHTML='<h3 style="font-weight: 100;color: white;">Enter time quantum</h3>'
+                    $("#extra2").append("<input id='time_quantum'>")
+                    x = "index";
+                });
+                
+                $("#linked").click(function(){
+                    $("#extra2").fadeOut(0);
+                    $("#extra1").fadeIn()
+                    document.getElementById("extra1").innerHTML='<h3 style="font-weight: 100;color: white;">Enter Priority</h3>'
+                    
+                    var n=$("#number_of_processes").val();
+                    var i;
+                    for(i=0;i<n;i+=1)
+                    {
+                        $("#extra1").append("<input style='width:5%' id='priority"+i+"'>")
+                        
+                    }
+                    x="linked";
+                });
+                
+                $("#conti").click(function(){
+                    $("#extra2").fadeOut(0);
+                    $("#extra1").fadeOut(0);  
+                    x = "conti";
+                });
+                
+                $("#simulate").click(function(){
+                    
+                    var filename = [];
+                    var filesize= [];
+                    
+                    n = $("number_of_files").val();
+                    
+                    for(i=0;i<n;i+=1)
+                        {
+                            filename.push(JSON.stringify($("file_name" + String(i)).val()));
+                            filesize.push(JSON.stringify($("file_size"+ String(i)).val()));
+                            
+                        }
+                    $.post('/fileman/process/',{
+                        algo: JSON.stringify(x),finame: filename,fisize: filesize,number:JSON.stringify(n)
+                    },function(result){
+                        document.getElementsByTagName('BODY')[0].innerHTML = '';
+                    });
+                    }
+                    
+                });
+                
+                
+                
+            });
+        </script>
+        <style>
+        
+        a.animated-button.thar-four {
+            color: #fff;
+            cursor: pointer;
+            display: block;
+            position: relative;
+            border: 2px solid #34495e;
+            transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1);
+        0s;
+        }
+        a.animated-button.thar-four:hover {
+            color: #fff !important;
+            background-color: transparent;
+            text-shadow: nfour;
+        }
+        a.animated-button.thar-four:hover:before {
+            right: 0%;
+            left: auto;
+            width: 100%;
+        }
+        a.animated-button.thar-four:before {
+            display: block;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            height: 100%;
+            width: 0px;
+            z-index: -1;
+            content: '';
+            color: #000 !important;
+            background: #34495e;
+            transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1);
+        0s;
+        }
+        </style>
+               
+        
+    </head>
+    <body style="background-color: #1dd1a1;font-family: 'Lato', sans-serif;">
+        <h1 class="text-center" style="font-weight: 100;color:white">
+            File Allocation Algorithms
+        </h1>
+        <input style="width:25%;" class="center-block form-control" step="color:black;" id="number_of_files"  placeholder="Enter number of files">
+        <br>
+        <div class="col-sm-offset-5 col-sm-2 col-xs-6"> 
+            <a style="margin-left: 0px;" id="continue" class="btn btn-sm animated-button thar-four">Continue</a>
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="col-sm-12">
+            <div class="center-block" style="display:none" id="file_name">
+                <h3 style="font-weight: 100;color: white;">Enter file name</h3>
+            </div>
+            <div style="display:none" id="file_size">
+                <h3 style="font-weight: 100;color: white;"> Enter file size</h3>
+            </div>
+            <br><br>
+            
+        </div>
+        <div style="margin-left: 50px;" class="col-sm-2 col-xs-6"> 
+            <a style="margin-left: 50px;" id="conti" class="btn btn-sm animated-button thar-four">Contiguous</a>
+        </div>
+
+        <div class="col-sm-2 col-sm-offset-1 col-xs-6" style="margin-left: 50px;"> 
+            <a style="margin-left: 0px;" id="linked" class="btn btn-sm animated-button thar-four">Linked</a>
+        </div>
+
+        <div class="col-sm-2 col-sm-offset-1 col-xs-6" style="margin-left: 50px;"> 
+            <a style="margin-left: 0px;" id="index" class="btn btn-sm animated-button thar-four">Indexed</a>
+        </div>
+
+       
+        <br><br>
+        <div style="display: none;" id="extra1" class="col-sm-12">
+            
+        </div>
+        
+        <div style="display: none;" id="extra2" class="col-sm-12">
+        
+        </div>
+        <div style="display: none;" id="simulate">
+            
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div style="margin-top: 50px;" class="col-sm-offset-5 col-sm-2 col-xs-6"> 
+            <a id="simulate" class="btn btn-sm animated-button thar-four">Simulate</a>
+        </div>
+        </div>
+            
+    </body>
+          
+</html>

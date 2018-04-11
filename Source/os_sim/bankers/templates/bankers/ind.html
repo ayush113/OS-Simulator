@@ -9,7 +9,7 @@
 
 			<style>
                 body{
-                    background-color: dimgray;
+                    background-color: #e6faff;
                 }
                 h1, h2{
                     text-align: center;
@@ -44,16 +44,24 @@
 
     }
                 .panel-heading{
-                    background: crimson;
+                    background-color:#337ab7;
                 }
-                
+
                 .btn{
                     background: blue;
+                }
+
+								.panel-body{
+									background-color: #e6faff;
+								}
+                .panel-footer{
+                    background-color: #e6faff;
                 }
 
 	</style>
 
 		<script type="text/javascript">
+
 
         var res,pro;
         var resource;
@@ -169,6 +177,14 @@
 			function banker()
 			{
 						var res_form = document.resource;
+
+						$("#FormFields").toggleClass("hide")
+						$("#FormFields1").toggleClass("hide")
+						$("#FormFields2").toggleClass("hide")
+						$(".panel-footer").toggleClass("hide")
+						$(".form-control").toggleClass("hide")
+						$("#1").toggleClass("hide")
+						$("#2").toggleClass("hide")
 
 						var resource = [];
 						for(var i = 1;i <= res; i++)
@@ -391,18 +407,18 @@
 		<div class = "panel"
 	        style="margin : 0.25cm 0.25cm 0.25cm 0.25cm;">
 	        <div class="panel-heading">
-	            <h2>Banker's Algorithm</h2>
+	            <h2 style="color:white">Banker's Algorithm</h2>
 	        </div>
 			<div class="panel-body">
 				<form name = "resource">
 		            <div class = "form-group" style="margin-left:50px; float:left;">
-					<label>Number of Resource types:</label><input class="form-control" type="Number" onkeyup="BuildFormFields(parseInt(this.value, 10));" />
+					<label id="1">Number of Resource types:</label><input class="form-control" type="Number" onkeyup="BuildFormFields(parseInt(this.value, 10));" />
 					<div id="FormFields" style=""></div>
 		            </div>
 				</form>
 		        <form name = "Need">
 		            <div class = "form-group" style="margin-left:50px;float:left;">
-					<label>Number of Processes:</label> <input class="form-control" type="Number" onkeyup="BuildFormFields2(y = parseInt(this.value, 10));" />
+					<label id="2">Number of Processes:</label> <input class="form-control" type="Number" onkeyup="BuildFormFields2(y = parseInt(this.value, 10));" />
 					<div id="FormFields1"></div>
 		            </div>
 					<!-- <button type="button" onclick="banker()">Try it</button> -->

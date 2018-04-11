@@ -25,5 +25,6 @@ urlpatterns = [
     path('sched/',include('proc_sch.urls')),
     path('chatting/',include('chat.urls')),
     path('others/',include('others.urls')),
-    path('dead/',include('bankers.urls'))
+    path('dead/',include('bankers.urls')),
+    path('fileman/',include('fileman.urls'))
 ]

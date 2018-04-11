@@ -7,6 +7,11 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+  body{
+    background-color: #e6faff;
+  }
+  </style>
 </head>
 
 <body style="padding:10px;">
@@ -27,12 +32,12 @@
 					<option value="LFU">Least Frequently Used</option>
 					<option value="Optimal">Optimal</option>
 					<option value="Second Chance">Second Chance</option>
-				</select>	
-			</input>		
+				</select>
+			</input>
 			<h4>Page Request Queue:</h4>
 			<input type="text" class="requests form-control" placeholder="Enter requesting page numbers"></input>
 			<h4>No of frames in cache:</h4>
-			<input type="text" class="size form-control" id="csize" placeholder="Enter number of frames"></input>		
+			<input type="text" class="size form-control" id="csize" placeholder="Enter number of frames"></input>
 			<!--<input type="submit" id="submit" class="submit formaction">-->
 		</div>
 		</form>
@@ -47,10 +52,10 @@
 	<div class="frame-body" id="1">
 			<h4 id="hits"></h4>
 			<h4 id="misses"></h4>
-			<h4 id="hitrate"></h4>		
-	</div>	
+			<h4 id="hitrate"></h4>
+	</div>
 </div>
-  
+
 </body>
 </html>
 
@@ -65,7 +70,7 @@ var rate;
 function FIFO()
 {
 	var i,j,flag=0;
-	var counter=0;	
+	var counter=0;
 	for(i=0;i<Q.length;i++)
 	{
 		var card = document.createElement("div");
@@ -83,7 +88,7 @@ function FIFO()
 		div0.setAttribute("class", "request");
 		div0.innerHTML = Q[i];
 		card.appendChild(div0);
-		
+
 		for(j=0;j<cacheSize;++j)
 		{
 			var div1 = document.createElement("div");
@@ -92,15 +97,15 @@ function FIFO()
 			else
 				div1.innerHTML = cache[j];
 			card.appendChild(div1);
-		}	
+		}
 		if(flag==1)
 		{
 			var div2 = document.createElement("div");
 			div2.setAttribute("class", "hitmiss status");
-			div2.innerHTML = "Hit";	
+			div2.innerHTML = "Hit";
 			card.appendChild(div2);
 			card.style="background-color:#00cc00;";
-			tot_hits++;	
+			tot_hits++;
 		}
 		else
 		{
@@ -108,12 +113,12 @@ function FIFO()
 			counter = (counter+1)%cacheSize;
 			var div2 = document.createElement("div");
 			div2.setAttribute("class", "hitmiss status");
-			div2.innerHTML = "Miss";	
+			div2.innerHTML = "Miss";
 			card.appendChild(div2);
 			card.style="background-color:#ff1a1a;";
 			tot_miss++;
 		}
-		document.body.appendChild(card);			
+		document.body.appendChild(card);
 	}
 }
 
@@ -143,7 +148,7 @@ function LRU()
 		div0.setAttribute("class", "request");
 		div0.innerHTML = Q[i];
 		card.appendChild(div0);
-		
+
 		for(j=0;j<cacheSize;++j)
 		{
 			var div1 = document.createElement("div");
@@ -152,15 +157,15 @@ function LRU()
 			else
 				div1.innerHTML = cache[j];
 			card.appendChild(div1);
-		}	
+		}
 		if(flag==1)
 		{
 			var div2 = document.createElement("div");
 			div2.setAttribute("class", "hitmiss status");
-			div2.innerHTML = "Hit";	
+			div2.innerHTML = "Hit";
 			card.appendChild(div2);
-			card.style="background-color:#00cc00;";	
-			tot_hits++;	
+			card.style="background-color:#00cc00;";
+			tot_hits++;
 		}
 		else
 		{
@@ -177,7 +182,7 @@ function LRU()
 			used[pos]=time;
 			var div2 = document.createElement("div");
 			div2.setAttribute("class", "hitmiss status");
-			div2.innerHTML = "Miss";	
+			div2.innerHTML = "Miss";
 			card.appendChild(div2);
 			card.style="background-color:#ff1a1a;";
 			tot_miss++;
@@ -192,7 +197,7 @@ function LFU()
     var least,repin,sofarcnt=0,bn=0;
     var hitind,flag, pgfaultcnt=0;
     var i,j,k;
-	
+
     for(i=0; i<cacheSize; i++)
         usedcnt[i]=0;
 
@@ -214,7 +219,7 @@ function LFU()
 		div0.setAttribute("class", "request");
 		div0.innerHTML = Q[i];
 		card.appendChild(div0);
-		
+
 		for(j=0;j<cacheSize;++j)
 		{
 			var div1 = document.createElement("div");
@@ -223,17 +228,17 @@ function LFU()
 			else
 				div1.innerHTML = cache[j];
 			card.appendChild(div1);
-		}	
-		
+		}
+
         if(flag==1)
         {
             usedcnt[hitind]++;
             var div2 = document.createElement("div");
 			div2.setAttribute("class", "hitmiss status");
-			div2.innerHTML = "Hit";	
+			div2.innerHTML = "Hit";
 			card.appendChild(div2);
-			card.style="background-color:#00cc00;";	
-			tot_hits++;	
+			card.style="background-color:#00cc00;";
+			tot_hits++;
         }
         else
         {
@@ -262,7 +267,7 @@ function LFU()
             }
             var div2 = document.createElement("div");
 			div2.setAttribute("class", "hitmiss status");
-			div2.innerHTML = "Miss";	
+			div2.innerHTML = "Miss";
 			card.appendChild(div2);
 			card.style="background-color:#ff1a1a;";
 			tot_miss++;
@@ -307,7 +312,7 @@ function Optimal()
 		div0.setAttribute("class", "request");
 		div0.innerHTML = Q[i];
 		card.appendChild(div0);
-		
+
 		for(j=0;j<cacheSize;++j)
 		{
 			var div1 = document.createElement("div");
@@ -316,15 +321,15 @@ function Optimal()
 			else
 				div1.innerHTML = cache[j];
 			card.appendChild(div1);
-		}	
+		}
 		if(flag==1)
 		{
 			var div2 = document.createElement("div");
 			div2.setAttribute("class", "hitmiss status");
-			div2.innerHTML = "Hit";	
+			div2.innerHTML = "Hit";
 			card.appendChild(div2);
 			card.style="background-color:#00cc00;";
-			tot_hits++;	
+			tot_hits++;
 		}
 		else
 		{
@@ -340,12 +345,12 @@ function Optimal()
 			cache[pos]=Q[i];
 			var div2 = document.createElement("div");
 			div2.setAttribute("class", "hitmiss status");
-			div2.innerHTML = "Miss";	
+			div2.innerHTML = "Miss";
 			card.appendChild(div2);
 			card.style="background-color:#ff1a1a;";
 			tot_miss++;
 		}
-		document.body.appendChild(card);	
+		document.body.appendChild(card);
 	}
 }
 
@@ -377,7 +382,7 @@ function SecondChance()
 		div0.setAttribute("class", "request");
 		div0.innerHTML = Q[i];
 		card.appendChild(div0);
-		
+
 		for(j=0;j<cacheSize;++j)
 		{
 			var div1 = document.createElement("div");
@@ -386,14 +391,14 @@ function SecondChance()
 			else
 				div1.innerHTML = cache[j];
 			card.appendChild(div1);
-		}	
-		
+		}
+
 		if(flag==1)
 		{
 		    ref[hitindex]=(ref[hitindex]+1)%2;
 			var div2 = document.createElement("div");
 			div2.setAttribute("class", "hitmiss status");
-			div2.innerHTML = "Hit";	
+			div2.innerHTML = "Hit";
 			card.appendChild(div2);
 			card.style="background-color:#00cc00;";
 			tot_hits++;
@@ -413,7 +418,7 @@ function SecondChance()
 			ref[counter]=0;
 			var div2 = document.createElement("div");
 			div2.setAttribute("class", "hitmiss status");
-			div2.innerHTML = "Miss";	
+			div2.innerHTML = "Miss";
 			card.appendChild(div2);
 			card.style="background-color:#ff1a1a;";
 			counter= (counter+1)%cacheSize;
@@ -427,12 +432,12 @@ $("#submit").click(function(){
 
 	Q = $(".requests").val().trim().split(" ");
     cacheSize = parseInt($(".size").val().trim());
-	document.getElementById("page replacement").style.display="block";	
-	
+	document.getElementById("page replacement").style.display="block";
+
 	var alg = document.getElementById("list");
 	var choice = alg.options[alg.selectedIndex].text;
 	document.getElementById("topic").innerHTML = choice;
-	
+
 	var card = document.createElement("div");
 	card.setAttribute("class", "card");
 	var div = document.createElement("div");
@@ -444,38 +449,38 @@ $("#submit").click(function(){
 		var div1 = document.createElement("div");
 		div1.innerHTML = "Cache[" + j + "]";
 		card.appendChild(div1);
-	}	
+	}
 	var div0 = document.createElement("div");
 	div0.setAttribute("class", "hitmiss status");
 	div0.innerHTML = "Status : ";
 	card.appendChild(div0);
-	
+
 	document.body.appendChild(card);
-	
+
 	var i;
 	for(i=0;i<cacheSize;i++)
 		cache[i]=-1;
-		
+
 	if(choice=="First In First Out")
 	{
 		FIFO();
-	}	
+	}
 	else if(choice=="Least Recently Used")
-	{	
+	{
 		LRU();
-	}	
+	}
 	else if(choice=="Least Frequently Used")
-	{	
+	{
 		LFU();
-	}	
+	}
 	else if(choice=="Optimal")
-	{	
+	{
 		Optimal();
 	}
 	else if(choice=="Second Chance")
 	{
 		SecondChance();
-	}	
+	}
 	rate = tot_hits/(tot_hits + tot_miss) * 100;
 	document.getElementById("hits").innerHTML = "Hits : " + tot_hits;
 	document.getElementById("misses").innerHTML = "Misses : " + tot_miss;
